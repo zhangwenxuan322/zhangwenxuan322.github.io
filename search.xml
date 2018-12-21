@@ -7,7 +7,7 @@
       <link href="/2018/12/21/iOS-valuePass/"/>
       <url>/2018/12/21/iOS-valuePass/</url>
       
-        <content type="html"><![CDATA[<h2 id="iOS开发页面传值的四种方式"><a href="#iOS开发页面传值的四种方式" class="headerlink" title="#iOS开发页面传值的四种方式"></a>#<strong>iOS开发页面传值的四种方式</strong></h2><p>前两天帮同学用swift解决了Block和代理传值，想到还没整理过OC的页面传值，原理都一样只是语法上的差异</p>]]></content>
+        <content type="html"><![CDATA[<hr><h2 id="title-iOS开发页面传值的四种方式"><a href="#title-iOS开发页面传值的四种方式" class="headerlink" title="title:iOS开发页面传值的四种方式"></a>title:iOS开发页面传值的四种方式</h2><h2 id="iOS开发页面传值的四种方式"><a href="#iOS开发页面传值的四种方式" class="headerlink" title="##iOS开发页面传值的四种方式"></a>##<strong>iOS开发页面传值的四种方式</strong></h2><p>前两天帮同学用swift解决了Block和代理传值，想到还没整理过OC的页面传值，原理都一样只是语法上的差异</p>]]></content>
       
       
       
