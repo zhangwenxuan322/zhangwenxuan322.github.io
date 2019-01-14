@@ -8,13 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="keywords" content="code">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Search">
-<meta property="og:url" content="http://yoursite.com/Search/index.html">
+<meta property="og:title" content="Oscar">
+<meta property="og:url" content="http://yoursite.com/archives/2019/01/index.html">
 <meta property="og:site_name" content="Oscar">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-12-19T12:36:15.983Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Search">
+<meta name="twitter:title" content="Oscar">
     
     
         
@@ -34,7 +33,7 @@
         
     
     <!-- title -->
-    <title>Search</title>
+    <title>Oscar</title>
     <!-- styles -->
     <link rel="stylesheet" href="/css/style.css">
     <!-- rss -->
@@ -78,23 +77,37 @@
 </header>
 
         
-        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
-  
-    <section id="search">
-  <form>
-    <input type="text" class="search-input" id="search-input" placeholder="search...">
-  </form>
-  <div id="search-result"></div>
-  <p class="search-no-result">No results found</p>
-</section>
-
-  
-  
-
-  <div class="content" itemprop="articleBody">
+        <div id="archive">
+  <ul class="post-list">
     
-  </div>
-</article>
+    
+    
+      
+      
+      
+      
+        <h2>2019</h2>
+      
+      <li class="post-item">
+        
+    <div class="meta">
+        <time datetime="2019-01-14T07:03:47.000Z" itemprop="datePublished">2019-01-14</time>
+    </div>
+
+
+        <span>
+    
+        <a class="" href="/2019/01/14/GRE整理/">GRE整理</a>
+    
+
+
+<span>
+      </span></span></li>
+    
+  </ul>
+  
+
+</div>
 
     </div>
     
@@ -132,36 +145,6 @@
 <script src="/lib/jquery/jquery.min.js"></script>
 <script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
 <script src="/js/main.js"></script>
-
-<!-- search -->
-  <script src="/js/search.js"></script>
-  <script type="text/javascript">
-    var inputArea = document.querySelector("#search-input");
-    var $resultArea = $("#search-result");
-
-    inputArea.onfocus = function() {
-      var search_path = "search.xml";
-      if (search_path.length == 0) {
-        search_path = "search.xml";
-      }
-      var path = "/" + search_path;
-      searchFunc(path, 'search-input', 'search-result');
-    }
-
-    inputArea.onkeydown = function(){
-        if(event.keyCode==13){
-            return false
-        }
-    }
-
-    $resultArea.bind("DOMNodeRemoved DOMNodeInserted", function(e) {
-        if (!$(e.target).text()) {
-            $(".search-no-result").show(200);
-        } else {
-            $(".search-no-result").hide();
-        }
-    })
-  </script>
 
 
     <!-- Google Analytics -->
