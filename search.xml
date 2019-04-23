@@ -7,7 +7,7 @@
       <link href="/2019/04/23/Vue%E5%B8%B8%E7%94%A8%E5%B1%9E%E6%80%A7/"/>
       <url>/2019/04/23/Vue%E5%B8%B8%E7%94%A8%E5%B1%9E%E6%80%A7/</url>
       
-        <content type="html"><![CDATA[<h2 id="Vue-js的7个常用属性"><a href="#Vue-js的7个常用属性" class="headerlink" title="Vue.js的7个常用属性"></a>Vue.js的7个常用属性</h2><ul><li>el<blockquote><p>用来指示vue编译器从什么地方开始解析 vue的语法，可以说是一个占位符。</p></blockquote></li><li>data<blockquote><p>用来组织从view中抽象出来的属性，可以说将视图的数据抽象出来存放在data中。</p></blockquote></li><li>template<blockquote><p>用来设置模板，会替换页面元素，包括占位符。</p></blockquote></li><li>methods<blockquote><p>页面的业务逻辑，存放js方法</p></blockquote></li><li>render<blockquote><p>创建虚拟DOM</p></blockquote></li><li>computed<blockquote><p>计算属性</p></blockquote></li><li>watch<blockquote><p><code>watch:function(newValue,oldValue){}</code><br>监听data中数据的变化，参数包含旧值和新值</p></blockquote></li></ul>]]></content>
+        <content type="html"><![CDATA[<h2 id="Vue-js的7个常用属性"><a href="#Vue-js的7个常用属性" class="headerlink" title="Vue.js的7个常用属性"></a>Vue.js的7个常用属性</h2><ul><li>el<br><em>用来指示vue编译器从什么地方开始解析 vue的语法，可以说是一个占位符。</em></li><li>data<br><em>用来组织从view中抽象出来的属性，可以说将视图的数据抽象出来存放在data中。</em></li><li>template<br><em>用来设置模板，会替换页面元素，包括占位符。</em></li><li>methods<br><em>页面的业务逻辑，存放js方法</em></li><li>render<br><em>创建虚拟DOM</em></li><li>computed<br><em>计算属性</em></li><li>watch<br><em><code>watch:function(newValue,oldValue){}</code><br>监听data中数据的变化，参数包含旧值和新值</em></li></ul>]]></content>
       
       
       
