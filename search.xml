@@ -7,7 +7,7 @@
       <link href="/2019/04/26/SSH%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95Mac/"/>
       <url>/2019/04/26/SSH%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95Mac/</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<ol><li><p>macOS的Terminal自带ssh，可通过whereis查看:<code>whereis SSH</code>。</p></li><li><p>启用SSHD服务<br>进入“系统偏好设置(System Preferences)”-&gt;选择“共享(Sharing)”-&gt;勾选“远程登录(Remote Login)”<br><br>完成后可用<code>ssh localhost</code>进行测试，如果提示输入密码认证就没问题了。</p></li><li><p>SSH和SCP</p><ul><li>ssh连接其他主机：<br><br><code>ssh username@192.168.1.1</code><br><br>username为要登录的主机名,192.168.1.1为要登录主机的IP地址</li><li>scp文件传输<br><br>scp的简单使用如下:<br><br><code>scp filename username@192.168.1.1:/tmp</code><br><br><strong> 不过一开始我没有传到/tmp目录下，遇到了Permission denied的问题， </strong><br><br>查了一些资料发现可能是那个目录没有操作权限的问题，默认的操作权限在/tmp目录下。</li></ul></li></ol>]]></content>
       
       
       
