@@ -14,12 +14,12 @@
 <meta property="og:site_name" content="Oscar">
 <meta property="og:description" content="设计模式之线程池模式 Thread Pool 背景 线程对于要处理的任务来说是一种非常有限的资源，除了要消耗CPU和内存，线程调用的栈也占内存，所以为每一个或每一组任务创建一个线程是一件很奢侈的事。  核心思想 常用的做法是使用一定数量的线程，让这些线程去执行不断产生的任务 以下这段摘自网络，原文链接：https://blog.csdn.net/buyoufa/article/details/51">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2019/10/14/初探线程池模式/Users/zhangwenxuan/hexo1/source/_posts/初探线程池模式/线程池模式.png">
-<meta property="og:updated_time" content="2019-10-14T11:38:49.727Z">
+<meta property="og:image" content="http://yoursite.com/2019/10/14/初探线程池模式/线程池模式.png">
+<meta property="og:updated_time" content="2019-10-14T11:43:16.687Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="初探线程池模式">
 <meta name="twitter:description" content="设计模式之线程池模式 Thread Pool 背景 线程对于要处理的任务来说是一种非常有限的资源，除了要消耗CPU和内存，线程调用的栈也占内存，所以为每一个或每一组任务创建一个线程是一件很奢侈的事。  核心思想 常用的做法是使用一定数量的线程，让这些线程去执行不断产生的任务 以下这段摘自网络，原文链接：https://blog.csdn.net/buyoufa/article/details/51">
-<meta name="twitter:image" content="http://yoursite.com/2019/10/14/初探线程池模式/Users/zhangwenxuan/hexo1/source/_posts/初探线程池模式/线程池模式.png">
+<meta name="twitter:image" content="http://yoursite.com/2019/10/14/初探线程池模式/线程池模式.png">
     
     
         
@@ -143,7 +143,7 @@
 <p><strong>常用的做法是使用一定数量的线程，让这些线程去执行不断产生的任务</strong></p>
 <p>以下这段摘自网络，原文链接：<a href="https://blog.csdn.net/buyoufa/article/details/51869942" target="_blank" rel="noopener">https://blog.csdn.net/buyoufa/article/details/51869942</a></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ThreadPool类负责接收和存储任务以及工作者线程的生命管理。submit用于接收一个任务，客户端代码调用该方法想线程池提交一个任务；shutdown关闭线程池对外提供的服务</span><br><span class="line">Promise可借以获取相应任务执行结果的凭据对象。setResule获取相应任务执行结果的执行结果，getResule设置相应任务执行结果的执行结果。</span><br><span class="line">WorkQueue工作队列，实现任务的缓存。enqueue将任务存入队列，dequeue从队列中取出一个任务。</span><br><span class="line">WorkerThread负责任务执行的工作这线程。run逐一从工作队列中取出任务执行，runTask执行制定的任务。</span><br></pre></td></tr></table></figure>
-<p><img src="/2019/10/14/初探线程池模式/Users/zhangwenxuan/hexo1/source/_posts/初探线程池模式/线程池模式.png" alt="线程池模式"></p>
+<p><img src="/2019/10/14/初探线程池模式/线程池模式.png" alt="线程池模式"></p>
 </li>
 <li><p>线程池模式的优势</p>
 <ol>
