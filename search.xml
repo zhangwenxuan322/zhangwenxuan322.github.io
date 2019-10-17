@@ -7,7 +7,7 @@
       <link href="/2019/10/17/Objective-C%E4%B8%AD%E7%9A%84Category%E5%92%8CExtension/"/>
       <url>/2019/10/17/Objective-C%E4%B8%AD%E7%9A%84Category%E5%92%8CExtension/</url>
       
-        <content type="html"><![CDATA[<h1 id="Objective-C中的Category-分类-和Extension-类扩展"><a href="#Objective-C中的Category-分类-和Extension-类扩展" class="headerlink" title="Objective-C中的Category(分类)和Extension(类扩展)"></a>Objective-C中的Category(分类)和Extension(类扩展)</h1>]]></content>
+        <content type="html"><![CDATA[<h1 id="Objective-C中的Category-分类-和Extension-类扩展"><a href="#Objective-C中的Category-分类-和Extension-类扩展" class="headerlink" title="Objective-C中的Category(分类)和Extension(类扩展)"></a>Objective-C中的Category(分类)和Extension(类扩展)</h1><h2 id="Category-分类"><a href="#Category-分类" class="headerlink" title="Category(分类)"></a>Category(分类)</h2><ul><li><p>Category可以动态地为已有类添加新行为</p></li><li><p>代码越写越多，维护性就越来越差，而分类的特性可以将类的实现分开在几个不同的文件中，Category的优势可以简单描述为：</p><ol><li>减小单个文件体积</li><li>功能分散开，便于维护管理</li></ol></li><li><p>Category能购添加<strong>实例方法，类方法，协议，属性</strong>，不能添加<strong>实例变量</strong></p></li><li><p>Category的重名方法会”覆盖”原有类的方法？</p><p>​    此处的覆盖并非真正的覆盖，而是Category中的同名方法被排到了方法列表的前面，当编译器在<em>运行时</em>查找方法时找到列表中的第一个对应的方法时，就返回了。</p></li></ul><h2 id="Extension-类扩展"><a href="#Extension-类扩展" class="headerlink" title="Extension(类扩展)"></a>Extension(类扩展)</h2><ul><li><p>在.m文件中</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@interface</span><br><span class="line">@end</span><br></pre></td></tr></table></figure></li><li><p>一般用来申明私有方法、私有属性和私有成员变量。</p></li><li><p>Extension在<em>编译期</em>决议</p></li></ul>]]></content>
       
       
       
