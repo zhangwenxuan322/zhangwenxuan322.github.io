@@ -3,6 +3,17 @@
   
     
     <entry>
+      <title>Objective-C中的关键字分析</title>
+      <link href="/2019/10/18/Objective-C%E4%B8%AD%E7%9A%84%E5%85%B3%E9%94%AE%E5%AD%97%E5%88%86%E6%9E%90/"/>
+      <url>/2019/10/18/Objective-C%E4%B8%AD%E7%9A%84%E5%85%B3%E9%94%AE%E5%AD%97%E5%88%86%E6%9E%90/</url>
+      
+        <content type="html"><![CDATA[<h2 id="OC中有哪些关键字？"><a href="#OC中有哪些关键字？" class="headerlink" title="OC中有哪些关键字？"></a>OC中有哪些关键字？</h2><ul><li>copy、assign、strong、retain、weak、readonly、readwrite、nonatomic、atomic……</li></ul><h2 id="深入理解他们前需要了解的基本概念"><a href="#深入理解他们前需要了解的基本概念" class="headerlink" title="深入理解他们前需要了解的基本概念"></a>深入理解他们前需要了解的基本概念</h2><ul><li><strong>野指针</strong>：野指针就是指向垃圾内存的指针，这个指针地址不是NULL。指向的对象被释放了，但是这个指针还没有置为nil，再次访问指向的值的时候就会出现不可预期的错误。</li><li><strong>僵尸指针</strong>：是野指针的一种情况，指向的对象被释放，但指针没有被赋成nil。</li><li><strong>僵尸对象</strong>：被释放的对象，在程序中被再度使用。</li><li><strong>内存泄漏</strong>：如果程序运行时一直分配内存而不及时释放无用的内存，程序占用的内存越来越大，直到把系统分配给该APP的内存消耗殚尽，程序因无内存可用导致崩溃，这样的情况我们称之为内存泄漏。</li></ul><h2 id="关键属性介绍"><a href="#关键属性介绍" class="headerlink" title="关键属性介绍"></a>关键属性介绍</h2><ul><li>property的默认属性是：readwrite、assign、atomic</li><li><strong>assign</strong>：用于修饰基本数据类型(NSInteger、CGFloat)和C数据类型(int、float、double、char等)，简单赋值，不更改引用计数。<em>id必须用assign</em></li><li><strong>weak</strong>：</li></ul>]]></content>
+      
+      
+      
+    </entry>
+    
+    <entry>
       <title>Objective-C中的Category和Extension</title>
       <link href="/2019/10/17/Objective-C%E4%B8%AD%E7%9A%84Category%E5%92%8CExtension/"/>
       <url>/2019/10/17/Objective-C%E4%B8%AD%E7%9A%84Category%E5%92%8CExtension/</url>
