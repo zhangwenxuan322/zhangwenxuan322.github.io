@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="张文轩">
 <meta property="og:description" content="OC中有哪些关键字？ copy、assign、strong、retain、weak、readonly、readwrite、nonatomic、atomic……  深入理解他们前需要了解的基本概念 野指针：野指针就是指向垃圾内存的指针，这个指针地址不是NULL。指向的对象被释放了，但是这个指针还没有置为nil，再次访问指向的值的时候就会出现不可预期的错误。 僵尸指针：是野指针的一种情况，指向的对象被">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-10-18T07:33:14.514Z">
+<meta property="og:updated_time" content="2019-10-18T07:46:35.206Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Objective-C中的关键字分析">
 <meta name="twitter:description" content="OC中有哪些关键字？ copy、assign、strong、retain、weak、readonly、readwrite、nonatomic、atomic……  深入理解他们前需要了解的基本概念 野指针：野指针就是指向垃圾内存的指针，这个指针地址不是NULL。指向的对象被释放了，但是这个指针还没有置为nil，再次访问指向的值的时候就会出现不可预期的错误。 僵尸指针：是野指针的一种情况，指向的对象被">
@@ -143,9 +143,36 @@
 <li><strong>内存泄漏</strong>：如果程序运行时一直分配内存而不及时释放无用的内存，程序占用的内存越来越大，直到把系统分配给该APP的内存消耗殚尽，程序因无内存可用导致崩溃，这样的情况我们称之为内存泄漏。</li>
 </ul>
 <h2 id="关键属性介绍"><a href="#关键属性介绍" class="headerlink" title="关键属性介绍"></a>关键属性介绍</h2><ul>
-<li>property的默认属性是：readwrite、assign、atomic</li>
-<li><strong>assign</strong>：用于修饰基本数据类型(NSInteger、CGFloat)和C数据类型(int、float、double、char等)，简单赋值，不更改引用计数。<em>id必须用assign</em></li>
-<li><strong>weak</strong>：</li>
+<li><p>property的默认属性是：readwrite、assign、atomic</p>
+</li>
+<li><p><strong>assign</strong>：用于修饰基本数据类型(NSInteger、CGFloat)和C数据类型(int、float、double、char等)，简单赋值，不更改引用计数。<em>id必须用assign</em></p>
+</li>
+<li><p><strong>weak</strong>：不增加引用计数。指向的地址一旦被释放，这些指针都将被赋值为nil。能攻有效防止野指针。</p>
+</li>
+<li><p><strong>retain</strong>：在非ARC时代，你需要自己retain一个想要保持的对象（保其命），ARC环境下就不需要了。现在唯一要做的就是用一个指针指向这个对象，只要指针没有被重置为空，对象就会一直在堆上。当指针指向新值的时候，原来的对象就会被release一次。</p>
+</li>
+<li><p><strong>strong</strong>：在ARC环境下，只要某一对象被一个strong指针指向，该对象就不会被销毁。如果对象没有被任何strong指针指向，那么就会被销毁。在默认情况下，所有的实例变量和局部变量都是strong类型的。可以说strong类型的指针在行为上跟非ARC下得retain是比较相似的。在ARC环境下，strong代替了retain，所以现在一般都是些strong。(浅复制)</p>
+</li>
+<li><p><strong>copy</strong>：新建一个对象并指向他。(深复制)</p>
+</li>
+<li><p><strong>readonly</strong>：只读，只生成getter方法，不生成setter方法。</p>
+</li>
+<li><p><strong>readwrite</strong>：读写，默认属性。存取器方法都需要在@implementation中实现（已经声明了）。如果使用@synthesize关键字，存取器方法都会被自动创建</p>
+</li>
+<li><p><strong>nonatomic</strong>：非原子性操作。非线程安全。</p>
+</li>
+<li><p><strong>atomic</strong>：原子性操作，默认属性。线程安全。</p>
+</li>
+<li><p><strong>synthesize</strong>和<strong>dynamic</strong>：</p>
+<ol>
+<li><p>@property有两个对应的词，一个是@synthesize，一个是@dynamic。如果@synthesize和@dynamic都没写，那么默认的就是@syntheszie var = _var;</p>
+</li>
+<li><p>@synthesize的语义是如果你没有手动实现setter方法和getter方法，那么编译器会自动为你加上这两个方法</p>
+</li>
+<li><p>@dynamic告诉编译器,属性的setter与getter方法由用户自己实现，不自动生成。</p>
+</li>
+</ol>
+</li>
 </ul>
 
   </div>
