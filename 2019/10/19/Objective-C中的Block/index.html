@@ -6,18 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="Block的定义 一种匿名函数，语法如下： return_type (^block_name)(parameters)">
+    <meta name="description" content="Block的定义 一种匿名函数，语法如下： return_type (^block_name)(parameters) 注意：Block是一种OC对象；当Block作为函数参数时应该放在参数列表的最后一个  多种场景下的Block语法 作为变量 returnType (^blockName)(parameterTypes) = ^returnType(parameters) {...};  作为属">
 <meta name="keywords" content="code">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Objective-C中的Block">
 <meta property="og:url" content="http://yoursite.com/2019/10/19/Objective-C中的Block/index.html">
 <meta property="og:site_name" content="张文轩">
-<meta property="og:description" content="Block的定义 一种匿名函数，语法如下： return_type (^block_name)(parameters)">
+<meta property="og:description" content="Block的定义 一种匿名函数，语法如下： return_type (^block_name)(parameters) 注意：Block是一种OC对象；当Block作为函数参数时应该放在参数列表的最后一个  多种场景下的Block语法 作为变量 returnType (^blockName)(parameterTypes) = ^returnType(parameters) {...};  作为属">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-10-19T15:09:15.501Z">
+<meta property="og:updated_time" content="2019-10-19T15:24:13.316Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Objective-C中的Block">
-<meta name="twitter:description" content="Block的定义 一种匿名函数，语法如下： return_type (^block_name)(parameters)">
+<meta name="twitter:description" content="Block的定义 一种匿名函数，语法如下： return_type (^block_name)(parameters) 注意：Block是一种OC对象；当Block作为函数参数时应该放在参数列表的最后一个  多种场景下的Block语法 作为变量 returnType (^blockName)(parameterTypes) = ^returnType(parameters) {...};  作为属">
     
     
         
@@ -99,7 +99,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Block的定义"><span class="toc-number">1.</span> <span class="toc-text">Block的定义</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Block的定义"><span class="toc-number">1.</span> <span class="toc-text">Block的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多种场景下的Block语法"><span class="toc-number">2.</span> <span class="toc-text">多种场景下的Block语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为何Block内的self要弱引用？"><span class="toc-number">3.</span> <span class="toc-text">为何Block内的self要弱引用？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考资料"><span class="toc-number">4.</span> <span class="toc-text">参考资料</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -136,6 +136,45 @@
     <h2 id="Block的定义"><a href="#Block的定义" class="headerlink" title="Block的定义"></a>Block的定义</h2><ul>
 <li>一种匿名函数，语法如下：</li>
 <li><code>return_type (^block_name)(parameters)</code></li>
+<li><strong>注意</strong>：Block是一种OC对象；当Block作为函数参数时应该放在参数列表的最后一个</li>
+</ul>
+<h2 id="多种场景下的Block语法"><a href="#多种场景下的Block语法" class="headerlink" title="多种场景下的Block语法"></a>多种场景下的Block语法</h2><ol>
+<li><p>作为变量</p>
+<p><code>returnType (^blockName)(parameterTypes) = ^returnType(parameters) {...};</code></p>
+</li>
+<li><p>作为属性</p>
+<p><code>@property (nonatomic, copy) returnType (^blockName)(parameterTypes);</code></p>
+</li>
+<li><p>函数中的参数</p>
+<p><code>- (void)someMethodThatTakesABlock:(returnType (^)(parameterTypes))blockName;</code></p>
+</li>
+<li><p>调用函数时的参数</p>
+<p><code>[someObject someMethodThatTakesABlock:^returnType (parameters) {...}];</code></p>
+</li>
+<li><p>作为typedef</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> returnType (^TypeName)(parameterTypes);</span><br><span class="line">TypeName blockName = ^returnType(parameters) &#123;...&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="为何Block内的self要弱引用？"><a href="#为何Block内的self要弱引用？" class="headerlink" title="为何Block内的self要弱引用？"></a>为何Block内的self要弱引用？</h2><ul>
+<li><p>在非 ARC 的情况下，对于 block 类型的属性应该使用 <code>copy</code> ，因为 block 需要维持其作用域中捕获的变量。在 ARC 中编译器会自动对 block 进行 copy 操作，因此使用 <code>strong</code> 或者 <code>copy</code> 都可以，没有什么区别，但是苹果仍然建议使用 <code>copy</code> 来指明编译器的行为。</p>
+</li>
+<li><p>lock 在捕获外部变量的时候，会保持一个强引用，当在 block 中捕获 <code>self</code> 时，由于对象会对 block 进行 <code>copy</code>，于是便形成了强引用循环：</p>
+</li>
+<li><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">BlockKeeper</span> : <span class="title">NSObject</span></span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">copy</span>) <span class="keyword">void</span> (^block)(<span class="keyword">void</span>);</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">BlockKeeper</span></span></span><br><span class="line">- (<span class="keyword">void</span>)configureBlock &#123;</span><br><span class="line">    <span class="keyword">self</span>.block = ^&#123;</span><br><span class="line">        [<span class="keyword">self</span> doSomething];    <span class="comment">// capturing a strong reference to self</span></span><br><span class="line">                               <span class="comment">// creates a strong reference cycle</span></span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line">...</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>为了避免强引用循环，最好对self弱引用：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)configureBlock &#123;</span><br><span class="line">    BlockKeeper * __<span class="keyword">weak</span> weakSelf = <span class="keyword">self</span>;</span><br><span class="line">    <span class="keyword">self</span>.block = ^&#123;</span><br><span class="line">        [weakSelf doSomething];   <span class="comment">// capture the weak reference</span></span><br><span class="line">                                  <span class="comment">// to avoid the reference cycle</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用弱引用会带来另一个问题，<code>weakSelf</code> 有可能会为 nil，如果多次调用 <code>weakSelf</code> 的方法，有可能在 block 执行过程中 <code>weakSelf</code> 变为 nil。因此需要在 block 中将 <code>weakSelf</code> “强化“</p>
+</li>
+<li><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">__<span class="keyword">weak</span> __typeof__(<span class="keyword">self</span>) weakSelf = <span class="keyword">self</span>;</span><br><span class="line"><span class="built_in">NSBlockOperation</span> *op = [[[<span class="built_in">NSBlockOperation</span> alloc] init] autorelease];</span><br><span class="line">[ op addExecutionBlock:^ &#123;</span><br><span class="line">    __<span class="keyword">strong</span> __typeof__(<span class="keyword">self</span>) strongSelf = weakSelf;</span><br><span class="line">    [strongSelf doSomething];</span><br><span class="line">    [strongSelf doMoreThing];</span><br><span class="line">&#125; ];</span><br><span class="line">[someOperationQueue addOperation:op];__<span class="keyword">strong</span>` 这一句在执行的时候，如果 WeakSelf 还没有变成 <span class="literal">nil</span>，那么就会 <span class="keyword">retain</span> <span class="keyword">self</span>，让 <span class="keyword">self</span> 在 block 执行期间不会变为 <span class="literal">nil</span>。这样上面的 `doSomething` 和 `doMoreThing` 要么全执行成功，要么全失败，不会出现一个成功一个失败，即执行到中间 `<span class="keyword">self</span>` 变成 <span class="literal">nil</span> 的情况。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>__strong</code> 这一句在执行的时候，如果 WeakSelf 还没有变成 nil，那么就会 retain self，让 self 在 block 执行期间不会变为 nil。这样上面的 <code>doSomething</code> 和 <code>doMoreThing</code> 要么全执行成功，要么全失败，不会出现一个成功一个失败，即执行到中间 <code>self</code> 变成 nil 的情况。</p>
+</li>
+</ul>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a href="https://hit-alibaba.github.io/interview/iOS/ObjC-Basic/Block.html" target="_blank" rel="noopener">https://hit-alibaba.github.io/interview/iOS/ObjC-Basic/Block.html</a></li>
 </ul>
 
   </div>
@@ -165,7 +204,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Block的定义"><span class="toc-number">1.</span> <span class="toc-text">Block的定义</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Block的定义"><span class="toc-number">1.</span> <span class="toc-text">Block的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多种场景下的Block语法"><span class="toc-number">2.</span> <span class="toc-text">多种场景下的Block语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为何Block内的self要弱引用？"><span class="toc-number">3.</span> <span class="toc-text">为何Block内的self要弱引用？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考资料"><span class="toc-number">4.</span> <span class="toc-text">参考资料</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
