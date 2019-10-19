@@ -3,6 +3,17 @@
   
     
     <entry>
+      <title>Objective-C中的Block</title>
+      <link href="/2019/10/19/Objective-C%E4%B8%AD%E7%9A%84Block/"/>
+      <url>/2019/10/19/Objective-C%E4%B8%AD%E7%9A%84Block/</url>
+      
+        <content type="html"><![CDATA[<h2 id="Block的定义"><a href="#Block的定义" class="headerlink" title="Block的定义"></a>Block的定义</h2><ul><li>一种匿名函数，语法如下：</li><li><code>return_type (^block_name)(parameters)</code></li></ul>]]></content>
+      
+      
+      
+    </entry>
+    
+    <entry>
       <title>Objective-C中的Runloop</title>
       <link href="/2019/10/19/Objective-C%E4%B8%AD%E7%9A%84Runloop/"/>
       <url>/2019/10/19/Objective-C%E4%B8%AD%E7%9A%84Runloop/</url>
