@@ -3,6 +3,17 @@
   
     
     <entry>
+      <title>Objective-C中的Runloop</title>
+      <link href="/2019/10/19/Objective-C%E4%B8%AD%E7%9A%84Runloop/"/>
+      <url>/2019/10/19/Objective-C%E4%B8%AD%E7%9A%84Runloop/</url>
+      
+        <content type="html"><![CDATA[<h2 id="什么是Runloop"><a href="#什么是Runloop" class="headerlink" title="什么是Runloop"></a>什么是Runloop</h2><ul><li><p>高级一点的循环</p></li><li><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">CFRunLoopRun</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;<span class="comment">/* DOES CALLOUT */</span></span><br><span class="line">    <span class="keyword">int32_t</span> result;</span><br><span class="line">    <span class="keyword">do</span> &#123;</span><br><span class="line">        result = CFRunLoopRunSpecific(CFRunLoopGetCurrent(), kCFRunLoopDefaultMode, <span class="number">1.0e10</span>, <span class="literal">false</span>);</span><br><span class="line">        CHECK_FOR_FORK();</span><br><span class="line">    &#125; <span class="keyword">while</span> (kCFRunLoopRunStopped != result &amp;&amp; kCFRunLoopRunFinished != result);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p>让线程在需要做事的时候忙起来，不需要的时候就休眠</p></li></ul><h2 id="Runloop的作用"><a href="#Runloop的作用" class="headerlink" title="Runloop的作用"></a>Runloop的作用</h2><ol><li>保持程序运行，循环避免线程被销毁</li><li>处理App的各种事件(触摸、定时器)</li><li>节省cpu资源，提高程序性能</li></ol><h2 id="Runloop和线程的关系"><a href="#Runloop和线程的关系" class="headerlink" title="Runloop和线程的关系"></a>Runloop和线程的关系</h2><p><img src="/2019/10/19/Objective-C中的Runloop/Runloop.png" alt="Runloop"></p><ul><li>很明显的可以看出Runloop从 input source 和 timer source 接受事件，然后在线程中处理事件。</li></ul>]]></content>
+      
+      
+      
+    </entry>
+    
+    <entry>
       <title>Objective-C中的关键字分析</title>
       <link href="/2019/10/18/Objective-C%E4%B8%AD%E7%9A%84%E5%85%B3%E9%94%AE%E5%AD%97%E5%88%86%E6%9E%90/"/>
       <url>/2019/10/18/Objective-C%E4%B8%AD%E7%9A%84%E5%85%B3%E9%94%AE%E5%AD%97%E5%88%86%E6%9E%90/</url>
