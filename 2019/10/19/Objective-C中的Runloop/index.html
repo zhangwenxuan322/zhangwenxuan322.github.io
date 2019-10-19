@@ -15,7 +15,7 @@
 <meta property="og:description" content="什么是Runloop 高级一点的循环  1234567void CFRunLoopRun(void) &amp;#123;	/* DOES CALLOUT */    int32_t result;    do &amp;#123;        result = CFRunLoopRunSpecific(CFRunLoopGetCurrent(), kCFRunLoopDefaultMode, 1.0e10,">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2019/10/19/Objective-C中的Runloop/Runloop.png">
-<meta property="og:updated_time" content="2019-10-19T06:57:59.888Z">
+<meta property="og:updated_time" content="2019-10-19T07:20:46.694Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Objective-C中的Runloop">
 <meta name="twitter:description" content="什么是Runloop 高级一点的循环  1234567void CFRunLoopRun(void) &amp;#123;	/* DOES CALLOUT */    int32_t result;    do &amp;#123;        result = CFRunLoopRunSpecific(CFRunLoopGetCurrent(), kCFRunLoopDefaultMode, 1.0e10,">
@@ -101,7 +101,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是Runloop"><span class="toc-number">1.</span> <span class="toc-text">什么是Runloop</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Runloop的作用"><span class="toc-number">2.</span> <span class="toc-text">Runloop的作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Runloop和线程的关系"><span class="toc-number">3.</span> <span class="toc-text">Runloop和线程的关系</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是Runloop"><span class="toc-number">1.</span> <span class="toc-text">什么是Runloop</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Runloop的作用"><span class="toc-number">2.</span> <span class="toc-text">Runloop的作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Runloop和线程的关系"><span class="toc-number">3.</span> <span class="toc-text">Runloop和线程的关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Input-Source和Timer-Source"><span class="toc-number">4.</span> <span class="toc-text">Input Source和Timer Source</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Runloop-Observer"><span class="toc-number">5.</span> <span class="toc-text">Runloop Observer</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Runloop-Mode"><span class="toc-number">6.</span> <span class="toc-text">Runloop Mode</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常见问题"><span class="toc-number">7.</span> <span class="toc-text">常见问题</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -151,6 +151,34 @@
 <h2 id="Runloop和线程的关系"><a href="#Runloop和线程的关系" class="headerlink" title="Runloop和线程的关系"></a>Runloop和线程的关系</h2><p><img src="/2019/10/19/Objective-C中的Runloop/Runloop.png" alt="Runloop"></p>
 <ul>
 <li>很明显的可以看出Runloop从 input source 和 timer source 接受事件，然后在线程中处理事件。</li>
+<li>Runloop和线程是绑定的。每个线程都有一个对应的Runloop对象，我们无法自己创建，但可以获取系统提供的Runloop对象。</li>
+<li>主线程的 Runloop 会在应用启动的时候完成启动，其他线程的 Runloop 默认并不会启动，需要我们手动启动。</li>
+</ul>
+<h2 id="Input-Source和Timer-Source"><a href="#Input-Source和Timer-Source" class="headerlink" title="Input Source和Timer Source"></a>Input Source和Timer Source</h2><ul>
+<li>Runloop事件的来源，其中Input Source又分为三类：<ol>
+<li>Port-Based Sources，系统底层的Port事件，例如CFSocketRef，在应用层基本用不到</li>
+<li>Custom Input Sources，用户手动创建的Source</li>
+<li>Cocoa Perform Selector Sources，Cocoa提供的performSelector系列方法，也是一种事件源</li>
+</ol>
+</li>
+<li>Timer Source是定时器事件</li>
+</ul>
+<h2 id="Runloop-Observer"><a href="#Runloop-Observer" class="headerlink" title="Runloop Observer"></a>Runloop Observer</h2><ul>
+<li>用于监控一下runloop事件：进入、定时器阶段、输入源阶段、休眠、唤醒前、退出</li>
+</ul>
+<h2 id="Runloop-Mode"><a href="#Runloop-Mode" class="headerlink" title="Runloop Mode"></a>Runloop Mode</h2><ul>
+<li>不同的Mode其实是对Source、Timer和Observe的不同组合方式</li>
+<li>共有五种Mode：NSDefaultRunLoopMode、NSConnectionReplyMode、NSModalPanelRunLoopMode、NSEventTrackingRunLoopMode、NSRunLoopCommonModes</li>
+<li>NSRunLoopCommonModes 实际上是一个 Mode 的集合，默认包括 NSDefaultRunLoopMode 和 NSEventTrackingRunLoopMode。</li>
+</ul>
+<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><ul>
+<li>开发中，常遇到滚动scrollview或tableview时，自定义的轮播图停止计时，无法正常轮播的情况，本质上是NSTimer的问题。</li>
+<li>由于一个timer一次只能加入到一个Runloop中，而且在runloop的NSDefaultRunLoopMode下，主线程Runloop会转到UITrackingRunLoopMode下，此时timer停止计时。</li>
+<li>解决方法有两种：<ol>
+<li>将NSTimer指定运行于NSRunLoopCommonModes，这样无论当前runloop运行哪个mode，事件都能得到执行。</li>
+<li>将计时器放到另一个线程上，主线程更新UI，这样runloop不会冲突。</li>
+</ol>
+</li>
 </ul>
 
   </div>
@@ -180,7 +208,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是Runloop"><span class="toc-number">1.</span> <span class="toc-text">什么是Runloop</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Runloop的作用"><span class="toc-number">2.</span> <span class="toc-text">Runloop的作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Runloop和线程的关系"><span class="toc-number">3.</span> <span class="toc-text">Runloop和线程的关系</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是Runloop"><span class="toc-number">1.</span> <span class="toc-text">什么是Runloop</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Runloop的作用"><span class="toc-number">2.</span> <span class="toc-text">Runloop的作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Runloop和线程的关系"><span class="toc-number">3.</span> <span class="toc-text">Runloop和线程的关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Input-Source和Timer-Source"><span class="toc-number">4.</span> <span class="toc-text">Input Source和Timer Source</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Runloop-Observer"><span class="toc-number">5.</span> <span class="toc-text">Runloop Observer</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Runloop-Mode"><span class="toc-number">6.</span> <span class="toc-text">Runloop Mode</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常见问题"><span class="toc-number">7.</span> <span class="toc-text">常见问题</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
