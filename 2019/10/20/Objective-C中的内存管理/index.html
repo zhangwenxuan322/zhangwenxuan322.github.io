@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="OC的内存分配机制 OC中，对象通过alloc在堆上创建，一旦对象创建完成，就不能在再移动。  MRC和ARC OC中提供两种内存管理机制：MRC(Mannual Reference Counting)和ARC(Automatic Reference Counting)，指手动和自动管理，现在推荐使用ARC来管理内存。  MRC   对象操作 OC中对应的方法 对应的 retainCount 变化">
+<meta name="keywords" content="code">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Objective-C中的内存管理">
+<meta property="og:url" content="http://yoursite.com/2019/10/20/Objective-C中的内存管理/index.html">
+<meta property="og:site_name" content="张文轩">
+<meta property="og:description" content="OC的内存分配机制 OC中，对象通过alloc在堆上创建，一旦对象创建完成，就不能在再移动。  MRC和ARC OC中提供两种内存管理机制：MRC(Mannual Reference Counting)和ARC(Automatic Reference Counting)，指手动和自动管理，现在推荐使用ARC来管理内存。  MRC   对象操作 OC中对应的方法 对应的 retainCount 变化">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-10-20T06:03:31.246Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Objective-C中的内存管理">
+<meta name="twitter:description" content="OC的内存分配机制 OC中，对象通过alloc在堆上创建，一旦对象创建完成，就不能在再移动。  MRC和ARC OC中提供两种内存管理机制：MRC(Mannual Reference Counting)和ARC(Automatic Reference Counting)，指手动和自动管理，现在推荐使用ARC来管理内存。  MRC   对象操作 OC中对应的方法 对应的 retainCount 变化">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Objective-C中的内存管理</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/Search/">搜索</a></li>
+         
+          <li><a href="/">主页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/posts/">博客</a></li>
+         
+          <li><a href="https://github.com/zhangwenxuan322">项目</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2019/10/19/Objective-C中的Block/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2019/10/20/Objective-C中的内存管理/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2019/10/20/Objective-C中的内存管理/&text=Objective-C中的内存管理"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2019/10/20/Objective-C中的内存管理/&title=Objective-C中的内存管理"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2019/10/20/Objective-C中的内存管理/&is_video=false&description=Objective-C中的内存管理"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Objective-C中的内存管理&body=Check out this article: http://yoursite.com/2019/10/20/Objective-C中的内存管理/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2019/10/20/Objective-C中的内存管理/&title=Objective-C中的内存管理"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2019/10/20/Objective-C中的内存管理/&title=Objective-C中的内存管理"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2019/10/20/Objective-C中的内存管理/&title=Objective-C中的内存管理"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2019/10/20/Objective-C中的内存管理/&title=Objective-C中的内存管理"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2019/10/20/Objective-C中的内存管理/&name=Objective-C中的内存管理&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#OC的内存分配机制"><span class="toc-number">1.</span> <span class="toc-text">OC的内存分配机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MRC和ARC"><span class="toc-number">2.</span> <span class="toc-text">MRC和ARC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MRC"><span class="toc-number">3.</span> <span class="toc-text">MRC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ARC"><span class="toc-number">4.</span> <span class="toc-text">ARC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Autorelease-Pool"><span class="toc-number">5.</span> <span class="toc-text">Autorelease Pool</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Objective-C中的内存管理
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <span itemprop="name">张文轩</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2019-10-20T05:37:26.000Z" itemprop="datePublished">2019-10-20</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="OC的内存分配机制"><a href="#OC的内存分配机制" class="headerlink" title="OC的内存分配机制"></a>OC的内存分配机制</h2><ul>
+<li>OC中，对象通过alloc在堆上创建，一旦对象创建完成，就不能在再移动。</li>
+</ul>
+<h2 id="MRC和ARC"><a href="#MRC和ARC" class="headerlink" title="MRC和ARC"></a>MRC和ARC</h2><ul>
+<li>OC中提供两种内存管理机制：MRC(Mannual Reference Counting)和ARC(Automatic Reference Counting)，指手动和自动管理，现在推荐使用ARC来管理内存。</li>
+</ul>
+<h2 id="MRC"><a href="#MRC" class="headerlink" title="MRC"></a>MRC</h2><table>
+<thead>
+<tr>
+<th>对象操作</th>
+<th style="text-align:center">OC中对应的方法</th>
+<th style="text-align:center">对应的 retainCount 变化</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>生成并持有对象</td>
+<td style="text-align:center">alloc/new/copy/mutableCopy等</td>
+<td style="text-align:center">+1</td>
+</tr>
+<tr>
+<td>持有对象</td>
+<td style="text-align:center">retain</td>
+<td style="text-align:center">+1</td>
+</tr>
+<tr>
+<td>释放对象</td>
+<td style="text-align:center">release</td>
+<td style="text-align:center">-1</td>
+</tr>
+<tr>
+<td>废弃对象</td>
+<td style="text-align:center">dealloc</td>
+<td style="text-align:center">-</td>
+</tr>
+</tbody>
+</table>
+<h2 id="ARC"><a href="#ARC" class="headerlink" title="ARC"></a>ARC</h2><ul>
+<li>ARC 是苹果引入的一种自动内存管理机制，会根据引用计数自动监视对象的生存周期，实现方式是在编译时期自动在已有代码中插入合适的内存管理代码以及在 Runtime 做一些优化。</li>
+<li>在ARC中与内存管理有关的变量标识符，有下面几种：<ul>
+<li><code>__strong</code></li>
+<li><code>__weak</code></li>
+<li><code>__unsafe_unretained</code></li>
+<li><code>__autoreleasing</code></li>
+</ul>
+</li>
+<li><code>__strong</code> 是默认使用的标识符。只有还有一个强指针指向某个对象，这个对象就会一直存活。</li>
+<li><code>__weak</code> 声明这个引用不会保持被引用对象的存活，如果对象没有强引用了，弱引用会被置为 nil。</li>
+<li><code>__unsafe_unretained</code> 声明这个引用不会保持被引用对象的存活，如果对象没有强引用了，它不会被置为 nil。如果它引用的对象被回收掉了，该指针就变成了野指针。</li>
+<li><code>__autoreleasing</code> 用于标示使用引用传值的参数（id *），在函数返回时会被自动释放掉。</li>
+<li>或者可以用属性标识符，前面的博客有提到</li>
+</ul>
+<h2 id="Autorelease-Pool"><a href="#Autorelease-Pool" class="headerlink" title="Autorelease Pool"></a>Autorelease Pool</h2><ul>
+<li><p>在 ARC 下，我们并不需要手动调用 autorelease 有关的方法，甚至可以完全不知道 autorelease 的存在，就可以正确管理好内存。因为 Cocoa Touch 的 Runloop 中，每个 runloop circle 中系统都自动加入了 Autorelease Pool 的创建和释放。</p>
+</li>
+<li><p>当我们需要创建和销毁大量的对象时，使用手动创建的 autoreleasepool 可以有效的避免内存峰值的出现。因为如果不手动创建的话，外层系统创建的 pool 会在整个 runloop circle 结束之后才进行 drain，手动创建的话，会在 block 结束之后就进行 drain 操作。一个普遍被使用的例子如下：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100000000</span>; i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">@autoreleasepool</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">NSString</span>* string = <span class="string">@"ab c"</span>;</span><br><span class="line">        <span class="built_in">NSArray</span>* array = [string componentsSeparatedByString:string];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果不使用 autoreleasepool ，需要在循环结束之后释放 100000000 个字符串，如果 使用的话，则会在每次循环结束的时候都进行 release 操作。</p>
+</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/Search/">搜索</a></li>
+         
+          <li><a href="/">主页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/posts/">博客</a></li>
+         
+          <li><a href="https://github.com/zhangwenxuan322">项目</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#OC的内存分配机制"><span class="toc-number">1.</span> <span class="toc-text">OC的内存分配机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MRC和ARC"><span class="toc-number">2.</span> <span class="toc-text">MRC和ARC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MRC"><span class="toc-number">3.</span> <span class="toc-text">MRC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ARC"><span class="toc-number">4.</span> <span class="toc-text">ARC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Autorelease-Pool"><span class="toc-number">5.</span> <span class="toc-text">Autorelease Pool</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2019/10/20/Objective-C中的内存管理/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2019/10/20/Objective-C中的内存管理/&text=Objective-C中的内存管理"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2019/10/20/Objective-C中的内存管理/&title=Objective-C中的内存管理"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2019/10/20/Objective-C中的内存管理/&is_video=false&description=Objective-C中的内存管理"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Objective-C中的内存管理&body=Check out this article: http://yoursite.com/2019/10/20/Objective-C中的内存管理/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2019/10/20/Objective-C中的内存管理/&title=Objective-C中的内存管理"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2019/10/20/Objective-C中的内存管理/&title=Objective-C中的内存管理"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2019/10/20/Objective-C中的内存管理/&title=Objective-C中的内存管理"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2019/10/20/Objective-C中的内存管理/&title=Objective-C中的内存管理"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2019/10/20/Objective-C中的内存管理/&name=Objective-C中的内存管理&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2019 张文轩
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/Search/">搜索</a></li>
+         
+          <li><a href="/">主页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/posts/">博客</a></li>
+         
+          <li><a href="https://github.com/zhangwenxuan322">项目</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+    <!-- Google Analytics -->
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-37473492-6', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+
+
