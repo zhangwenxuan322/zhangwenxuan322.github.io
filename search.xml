@@ -3,6 +3,28 @@
   
     
     <entry>
+      <title>CocoaTouch中的事件处理</title>
+      <link href="/2019/10/21/CocoaTouch%E4%B8%AD%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86-1/"/>
+      <url>/2019/10/21/CocoaTouch%E4%B8%AD%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86-1/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      
+    </entry>
+    
+    <entry>
+      <title>CocoaTouch中的事件处理</title>
+      <link href="/2019/10/21/CocoaTouch%E4%B8%AD%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86/"/>
+      <url>/2019/10/21/CocoaTouch%E4%B8%AD%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86/</url>
+      
+        <content type="html"><![CDATA[<h2 id="事件分类"><a href="#事件分类" class="headerlink" title="事件分类"></a>事件分类</h2><ol><li>触屏事件(Touch Event)</li><li>运动事件(Motion Event)</li><li>远端控制事件(Remote-Control Event)</li></ol><h2 id="响应者链"><a href="#响应者链" class="headerlink" title="响应者链"></a>响应者链</h2><ul><li><p>当发生事件响应时，必须知道由谁来响应事件。在 iOS 中，由响应者链来对事件进行响应。</p></li><li><p>所有事件响应的类都是 UIResponder 的子类，响应者链是一个由不同对象组成的层次结构，其中的每个对象将依次获得响应事件消息的机会。当发生事件时，事件首先被发送给第一响应者，第一响应者往往是事件发生的视图，也就是用户触摸屏幕的地方。事件将沿着响应者链一直向下传递，直到被接受并做出处理。一般来说，第一响应者是个视图对象或者其子类对象，当其被触摸后事件被交由它处理，如果它不处理，事件就会被传递给它的视图控制器对象 ViewController（如果存在），然后是它的父视图（superview）对象（如果存在），以此类推，直到顶层视图。接下来会沿着顶层视图（top view）到窗口（UIWindow 对象）再到程序（UIApplication 对象）。如果整个过程都没有响应这个事件，该事件就被丢弃。一般情况下，在响应者链中只要由对象处理事件，事件就停止传递。</p></li><li><p>一个典型的事件响应路线如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">First Responser --&gt; The Window --&gt; The Application --&gt; nil（丢弃）</span><br></pre></td></tr></table></figure></li><li><p>我们可以通过 <code>[responder nextResponder]</code> 找到当前 responder 的下一个 responder，持续这个过程到最后会找到 UIApplication 对象。</p></li><li><p>通常情况下，我们在 First Responder （一般也就是用户当前触控的 View ）这里就会响应请求，进入下面的事件分发机制。</p></li></ul><h2 id="事件分发"><a href="#事件分发" class="headerlink" title="事件分发"></a>事件分发</h2><ul><li>第一响应者（First responder）指的是当前接受触摸的响应者对象（通常是一个 UIView 对象），即表示当前该对象正在与用户交互，它是响应者链的开端。响应者链和事件分发的使命都是找出第一响应者。</li><li>iOS 系统检测到手指触摸 (Touch) 操作时会将其打包成一个 UIEvent 对象，并放入当前活动 Application 的事件队列，单例的 UIApplication 会从事件队列中取出触摸事件并传递给单例的 UIWindow 来处理，UIWindow 对象首先会使用 <code>hitTest:withEvent:</code>方法寻找此次 Touch 操作初始点所在的视图(View)，即需要将触摸事件传递给其处理的视图，这个过程称之为 hit-test view。</li><li><code>hitTest:withEvent:</code>方法的处理流程如下:<ul><li>首先调用当前视图的 <code>pointInside:withEvent:</code> 方法判断触摸点是否在当前视图内；</li><li>若返回 NO, 则 <code>hitTest:withEvent:</code> 返回 nil，若返回 YES, 则向当前视图的所有子视图 (subviews) 发送 <code>hitTest:withEvent:</code> 消息，所有子视图的遍历顺序是从最顶层视图一直到到最底层视图，即从 subviews 数组的末尾向前遍历，直到有子视图返回非空对象或者全部子视图遍历完毕；</li><li>若第一次有子视图返回非空对象，则 <code>hitTest:withEvent:</code> 方法返回此对象，处理结束；</li><li>如所有子视图都返回空，则 hitTest:withEvent: 方法返回自身 (self)。</li></ul></li></ul>]]></content>
+      
+      
+      
+    </entry>
+    
+    <entry>
       <title>Objective-C中的内存管理</title>
       <link href="/2019/10/20/Objective-C%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/"/>
       <url>/2019/10/20/Objective-C%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</url>
