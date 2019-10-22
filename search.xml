@@ -3,6 +3,17 @@
   
     
     <entry>
+      <title>Objective-C中的Runtime</title>
+      <link href="/2019/10/22/Objective-C%E4%B8%AD%E7%9A%84Runtime/"/>
+      <url>/2019/10/22/Objective-C%E4%B8%AD%E7%9A%84Runtime/</url>
+      
+        <content type="html"><![CDATA[<h2 id="OC和C的区别"><a href="#OC和C的区别" class="headerlink" title="OC和C的区别"></a>OC和C的区别</h2><ul><li>OC是动态语言，C是静态语言。</li><li>OC的函数调用在编译期无法确定，C的函数调用在编译期就已经决定。</li><li>Runtime就是去解决如何在运行期间找到调用方法的问题。</li></ul><h2 id="什么是Runtime"><a href="#什么是Runtime" class="headerlink" title="什么是Runtime"></a>什么是Runtime</h2><ul><li><p>对于实例变量有如下的思路：</p><blockquote><p>instance -&gt; class -&gt; method -&gt; SEL -&gt; IMP -&gt; 实现函数</p></blockquote></li><li><p>实例对象中存放 isa 指针以及实例变量，有 isa 指针可以找到实例对象所属的类对象 (类也是对象，面向对象中一切都是对象)，类中存放着实例方法列表，在这个方法列表中 SEL 作为 key，IMP 作为 value。 在编译时期，根据方法名字会生成一个唯一的 Int 标识，这个标识就是 SEL。IMP 其实就是函数指针 指向了最终的函数实现。整个 Runtime 的核心就是 objc_msgSend 函数，通过给类发送 SEL 以传递消息，找到匹配的 IMP 再获取最终的实现。如下的这张图描述了对象的内存布局。</p></li><li><p><img src="/2019/10/22/Objective-C中的Runtime/对象的内存布局.png" alt="对象的内存布局"></p></li><li><p>类中的 super_class 指针可以追溯整个继承链。向一个对象发送消息时，Runtime 会根据实例对象的 isa 指针找到其所属的类，并自底向上直至根类(NSObject)中 去寻找 SEL 所对应的方法，找到后就运行整个方法。</p></li><li><p>metaClass是元类，也有 isa 指针、super_class 指针。其中保存了类方法列表。</p></li></ul><h2 id="消息传递机制"><a href="#消息传递机制" class="headerlink" title="消息传递机制"></a>消息传递机制</h2><ul><li>objc_msgSend函数的消息处理过程</li><li>不涵盖消息cache机制</li><li>需要对Objective-C runtime有一定的了解</li></ul><p>如下用于描述 objc_msgSend 函数的调用流程：</p><ul><li>1.检测 SEL 是否应该被忽略</li><li>2.检测发送的 target 是否为 nil ，如果是则忽略该消息</li><li>3.<ul><li>当调用实例方法时，通过 isa 指针找到实例对应的 class 并且在其中的缓存方法列表以及方法列表中进行查询，如果找不到则根据 super_class 指针在父类中查询，直至根类(NSObject 或 NSProxy).</li><li>当调用类方法时，通过 isa 指针找到实例对应的 metaclass 并且在其中的缓存方法列表以及方法列表中进行查询，如果找不到则根据 super_class 指针在父类中查询，直至根类(NSObject 或 NSProxy). (根据此前的开篇中的图，Root Meta Class 还是有根类的。)</li></ul></li><li>如果还没找到则进入消息动态解析过程。</li></ul><h2 id="动态消息解析"><a href="#动态消息解析" class="headerlink" title="动态消息解析"></a>动态消息解析</h2><ul><li><p><img src="/2019/10/22/Objective-C中的Runtime/动态消息解析.png" alt="动态消息解析"></p></li><li><p>如下用于描述动态消息解析的流程:</p><ul><li>1.通过 resolveInstanceMethod 得知方法是否为动态添加，YES则通过 class_addMethod 动态添加方法，处理消息，否则进入下一步。dynamic 属性就与这个过程有关，当一个属性声明为 dynamic 时 就是告诉编译器：开发者一定会添加 setter/getter 的实现，而编译时不用自动生成。</li><li>2.这步会进入 forwardingTargetForSelector 用于指定哪个对象来响应消息。如果返回nil 则进入第三步。这种方式把消息原封不动地转发给目标对象，有着比较高的效率。如果不能自己的类里面找到替代方法，可以重载这个方法，然后把消息转给其他的对象。</li><li>3.这步调用 methodSignatureForSelector 进行方法签名，这可以将函数的参数类型和返回值封装。如果返回 nil 说明消息无法处理并报错 <code>unrecognized selector sent to instance</code>，如果返回 methodSignature，则进入 forwardInvocation ，在这里可以修改实现方法，修改响应对象等，如果方法调用成功，则结束。如果依然不能正确响应消息，则报错 <code>unrecognized selector sent to instance</code>.</li></ul><p>可以利用 2、3 中的步骤实现对接受消息对象的转移，可以实现“多重继承”的效果。</p></li></ul><p>参考资料：</p><p><a href="https://hit-alibaba.github.io/interview/iOS/ObjC-Basic/Runtime.html" target="_blank" rel="noopener">https://hit-alibaba.github.io/interview/iOS/ObjC-Basic/Runtime.html</a></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    <entry>
       <title>CocoaTouch中的事件处理</title>
       <link href="/2019/10/21/CocoaTouch%E4%B8%AD%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86/"/>
       <url>/2019/10/21/CocoaTouch%E4%B8%AD%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86/</url>
