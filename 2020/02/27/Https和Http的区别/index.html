@@ -14,15 +14,15 @@
 <meta property="og:site_name" content="张文轩">
 <meta property="og:description" content="前言昨天在做毕设开发安卓端，向个人服务器请求数据的时候，遇到了CLEARTEXT communication to *** not permitted by network security policy的问题。搜索后发现是谷歌对于新版的安卓系统限制了非加密的流量请求。 解决方法有两种：  把所有的http请求全部改为https请求 在AndroidManifest.xml中配置cleartext">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2020/02/27/Https和Http的区别/Users/zhangwenxuan/hexo1/source/_posts/Https和Http的区别/Https图解.jpeg">
-<meta property="og:image" content="http://yoursite.com/2020/02/27/Https和Http的区别/Users/zhangwenxuan/hexo1/source/_posts/Https和Http的区别/SSL图解.jpeg">
-<meta property="og:image" content="http://yoursite.com/2020/02/27/Https和Http的区别/Users/zhangwenxuan/hexo1/source/_posts/Https和Http的区别/Https证书.png">
-<meta property="og:image" content="http://yoursite.com/2020/02/27/Https和Http的区别/Users/zhangwenxuan/hexo1/source/_posts/Https和Http的区别/数字证书.jpeg">
-<meta property="og:updated_time" content="2020-02-27T02:31:01.845Z">
+<meta property="og:image" content="http://yoursite.com/2020/02/27/Https和Http的区别/Https图解.jpeg">
+<meta property="og:image" content="http://yoursite.com/2020/02/27/Https和Http的区别/SSL图解.jpeg">
+<meta property="og:image" content="http://yoursite.com/2020/02/27/Https和Http的区别/Https证书.png">
+<meta property="og:image" content="http://yoursite.com/2020/02/27/Https和Http的区别/数字证书.jpeg">
+<meta property="og:updated_time" content="2020-02-27T03:04:20.978Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Https和Http的区别">
 <meta name="twitter:description" content="前言昨天在做毕设开发安卓端，向个人服务器请求数据的时候，遇到了CLEARTEXT communication to *** not permitted by network security policy的问题。搜索后发现是谷歌对于新版的安卓系统限制了非加密的流量请求。 解决方法有两种：  把所有的http请求全部改为https请求 在AndroidManifest.xml中配置cleartext">
-<meta name="twitter:image" content="http://yoursite.com/2020/02/27/Https和Http的区别/Users/zhangwenxuan/hexo1/source/_posts/Https和Http的区别/Https图解.jpeg">
+<meta name="twitter:image" content="http://yoursite.com/2020/02/27/Https和Http的区别/Https图解.jpeg">
     
     
         
@@ -146,9 +146,11 @@
 </ol>
 <p>此前对Https只停留在比Http安全这个理解层面，今天进行一下全面了解并做记录</p>
 <h1 id="Https是什么？"><a href="#Https是什么？" class="headerlink" title="Https是什么？"></a>Https是什么？</h1><p><strong>HTTPS=HTTP over SSL/TLS，也就是说，HTTPS 在传输层 TCP 和应用层 HTTP 之间，多走了一层 SSL/TLS。</strong></p>
-<p><img src="/2020/02/27/Https和Http的区别/Users/zhangwenxuan/hexo1/source/_posts/Https和Http的区别/Https图解.jpeg" alt="Https图解"></p>
+<center class="half"><br><img src="/2020/02/27/Https和Http的区别/Https图解.jpeg"><br></center>
+
 <p>由上图可以看出，<strong>TLS/SSL 是 HTTPS 的核心</strong>。</p>
-<p><img src="/2020/02/27/Https和Http的区别/Users/zhangwenxuan/hexo1/source/_posts/Https和Http的区别/SSL图解.jpeg" alt="SSL图解"></p>
+<center class="half"><br><img src="/2020/02/27/Https和Http的区别/SSL图解.jpeg"><br></center>
+
 <p><strong>SSL/TLS 协议作用在传输层和应用层之间，对应用层数据进行加密传输。</strong></p>
 <h1 id="为什么Https更安全"><a href="#为什么Https更安全" class="headerlink" title="为什么Https更安全"></a>为什么Https更安全</h1><p>HTTP 1.1 版本存在一个很大的问题-<strong>明文传输（Plaintext/Clear Text）</strong>，这个问题在互联网时代的今天是致命的，一旦数据在公共网络中被第三方截获，其通信内容轻而易举地就被窃取了。而这个明文传输也是在谷歌新版安卓系统上默认被禁止了。</p>
 <p>为了解决这个问题，Https出现，它有三大优势：</p>
@@ -160,14 +162,20 @@
 <h2 id="数据加密"><a href="#数据加密" class="headerlink" title="数据加密"></a>数据加密</h2><p>Https同时拥有对称加密和非对称加密。前者只有一把密钥做加解密；后者有两把密钥，公钥和私钥，互为加解密，公钥给对方，私钥自己用。</p>
 <h2 id="身份验证"><a href="#身份验证" class="headerlink" title="身份验证"></a>身份验证</h2><p><strong>数字证书用于主体身份验证。</strong></p>
 <p>在 Chrome 浏览器上点击地址栏的“锁”标记后会出现下拉框，接着点击“证书”即可看到通过 HTTPS 访问该服务器时的数字证书。</p>
-<p><img src="/2020/02/27/Https和Http的区别/Users/zhangwenxuan/hexo1/source/_posts/Https和Http的区别/Https证书.png" alt="Https证书"></p>
+<center class="half"><br><img src="/2020/02/27/Https和Http的区别/Https证书.png"><br></center>
+
 <p>一张完整的数字证书包括：</p>
 <ul>
-<li><strong>主体的必要信息：版本(version)、序列号(serialNumber)、签名算法(signatureAlgorithm)、颁发者(issuer)、有效期(validity)、使用者(subject)、公钥信息(subjectPublicKeyInfo)</strong></li>
-<li><strong>主体的扩展信息(extension)：如密钥标识符、证书策略等</strong></li>
-<li><strong>数字签名(signature)，也称指纹</strong></li>
+<li><p><strong>主体的必要信息：版本(version)、序列号(serialNumber)、签名算法(signatureAlgorithm)、颁发者(issuer)、有效期(validity)、使用者(subject)、公钥信息(subjectPublicKeyInfo)</strong></p>
+</li>
+<li><p><strong>主体的扩展信息(extension)：如密钥标识符、证书策略等</strong></p>
+</li>
+<li><p><strong>数字签名(signature)，也称指纹</strong></p>
+</li>
+<li><center class="half"><br><img src="/2020/02/27/Https和Http的区别/数字证书.jpeg"><br></center>
+
+</li>
 </ul>
-<p><img src="/2020/02/27/Https和Http的区别/Users/zhangwenxuan/hexo1/source/_posts/Https和Http的区别/数字证书.jpeg" alt="数字证书"></p>
 <h2 id="完整性校验"><a href="#完整性校验" class="headerlink" title="完整性校验"></a>完整性校验</h2><p><strong>哈希</strong>，键值对数据结构，通过哈希函数把一个空间映射到另一个空间。非常好用的一个工具，比如负载均衡的一致性哈希、密码学中用于信息加密或数据校验的各种哈希（SHA、MD5 等）、二维空间定位的 GeoHash、对象相似度的 SimHash 等等。</p>
 
   </div>
