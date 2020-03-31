@@ -6,15 +6,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="keywords" content="code">
+    <meta name="description" content="Spark RDDSpark 的核心是建立在统一的抽象弹性分布式数据集（Resiliennt Distributed Datasets，RDD）之上的，这使得 Spark 的各个组件可以无缝地进行集成，能够在同一个应用程序中完成大数据处理。 RDD概念可以将 RDD 理解为一个分布式对象集合，本质上是一个只读的分区记录集合。每个 RDD 可以分成多个分区，每个分区就是一个数据集片段。一个 RDD">
+<meta name="keywords" content="code">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spark中的RDD">
 <meta property="og:url" content="http://yoursite.com/2020/03/31/Spark中的RDD/index.html">
 <meta property="og:site_name" content="张文轩">
+<meta property="og:description" content="Spark RDDSpark 的核心是建立在统一的抽象弹性分布式数据集（Resiliennt Distributed Datasets，RDD）之上的，这使得 Spark 的各个组件可以无缝地进行集成，能够在同一个应用程序中完成大数据处理。 RDD概念可以将 RDD 理解为一个分布式对象集合，本质上是一个只读的分区记录集合。每个 RDD 可以分成多个分区，每个分区就是一个数据集片段。一个 RDD">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-03-31T09:31:55.608Z">
+<meta property="og:image" content="http://yoursite.com/2020/03/31/Spark中的RDD/RDD运作图.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/03/31/Spark中的RDD/RDD转换.PNG">
+<meta property="og:image" content="http://yoursite.com/2020/03/31/Spark中的RDD/RDD行动.PNG">
+<meta property="og:updated_time" content="2020-03-31T09:48:25.444Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spark中的RDD">
+<meta name="twitter:description" content="Spark RDDSpark 的核心是建立在统一的抽象弹性分布式数据集（Resiliennt Distributed Datasets，RDD）之上的，这使得 Spark 的各个组件可以无缝地进行集成，能够在同一个应用程序中完成大数据处理。 RDD概念可以将 RDD 理解为一个分布式对象集合，本质上是一个只读的分区记录集合。每个 RDD 可以分成多个分区，每个分区就是一个数据集片段。一个 RDD">
+<meta name="twitter:image" content="http://yoursite.com/2020/03/31/Spark中的RDD/RDD运作图.jpg">
     
     
         
@@ -96,7 +103,7 @@
 
     </div>
     <div id="toc">
-      
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Spark-RDD"><span class="toc-number">1.</span> <span class="toc-text">Spark RDD</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#RDD概念"><span class="toc-number">2.</span> <span class="toc-text">RDD概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#RDD基本操作"><span class="toc-number">3.</span> <span class="toc-text">RDD基本操作</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -130,7 +137,42 @@
   
 
   <div class="content" itemprop="articleBody">
-    
+    <h1 id="Spark-RDD"><a href="#Spark-RDD" class="headerlink" title="Spark RDD"></a>Spark RDD</h1><p>Spark 的核心是建立在统一的抽象弹性分布式数据集（Resiliennt Distributed Datasets，RDD）之上的，这使得 Spark 的各个组件可以无缝地进行集成，能够在同一个应用程序中完成大数据处理。</p>
+<h1 id="RDD概念"><a href="#RDD概念" class="headerlink" title="RDD概念"></a>RDD概念</h1><p>可以将 RDD 理解为一个分布式对象集合，本质上是一个只读的分区记录集合。每个 RDD 可以分成多个分区，每个分区就是一个数据集片段。一个 RDD 的不同分区可以保存到集群中的不同结点上，从而可以在集群中的不同结点上进行并行计算。</p>
+<center class="half"><br><img src="/2020/03/31/Spark中的RDD/RDD运作图.jpg"><br></center>
+
+<p>RDD 具有容错机制，并且只读不能修改，可以执行确定的转换操作创建新的 RDD。具体来讲，RDD 具有以下几个属性。</p>
+<ul>
+<li>只读：不能修改，只能通过转换操作生成新的 RDD。</li>
+<li>分布式：可以分布在多台机器上进行并行处理。</li>
+<li>弹性：计算过程中内存不够时它会和磁盘进行数据交换。</li>
+<li>基于内存：可以全部或部分缓存在内存中，在多次计算间重用。</li>
+</ul>
+<h1 id="RDD基本操作"><a href="#RDD基本操作" class="headerlink" title="RDD基本操作"></a>RDD基本操作</h1><p>RDD 的操作分为转化（Transformation）操作和行动（Action）操作。转化操作就是从一个 RDD 产生一个新的 RDD，而行动操作就是进行实际的计算。</p>
+<p>RDD 的操作是惰性的，当 RDD 执行转化操作的时候，实际计算并没有被执行，只有当 RDD 执行行动操作时才会促发计算任务提交，从而执行相应的计算操作。</p>
+<ol>
+<li>构建操作</li>
+</ol>
+<ul>
+<li><p>从内存里直接读取数据。</p>
+<p><code>val rdd01 = sc.makeRDD(List(l,2,3,4,5,6))</code></p>
+</li>
+<li><p>从文件系统里读取数据，文件系统的种类很多，常见的就是 HDFS 及本地文件系统。</p>
+<p><code>val rdd:RDD[String] == sc.textFile(“file://...txt”,1)</code></p>
+</li>
+</ul>
+<ol start="2">
+<li><p>转换操作</p>
+<center class="half"><br><img src="/2020/03/31/Spark中的RDD/RDD转换.PNG"><br></center>
+</li>
+<li><p>行动操作</p>
+<center class="half"><br><img src="/2020/03/31/Spark中的RDD/RDD行动.PNG"><br></center>
+
+
+
+</li>
+</ol>
+
   </div>
 </article>
 
@@ -158,7 +200,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Spark-RDD"><span class="toc-number">1.</span> <span class="toc-text">Spark RDD</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#RDD概念"><span class="toc-number">2.</span> <span class="toc-text">RDD概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#RDD基本操作"><span class="toc-number">3.</span> <span class="toc-text">RDD基本操作</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
