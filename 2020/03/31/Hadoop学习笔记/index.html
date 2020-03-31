@@ -18,7 +18,11 @@
 <meta property="og:image" content="http://yoursite.com/2020/03/31/Hadoop学习笔记/HDFS架构.png">
 <meta property="og:image" content="http://yoursite.com/2020/03/31/Hadoop学习笔记/HDFS写文件.png">
 <meta property="og:image" content="http://yoursite.com/2020/03/31/Hadoop学习笔记/HDFS读文件.png">
-<meta property="og:updated_time" content="2020-03-31T02:00:56.493Z">
+<meta property="og:image" content="http://yoursite.com/2020/03/31/Hadoop学习笔记/旧MapReduce架构.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/03/31/Hadoop学习笔记/YARN架构1.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/03/31/Hadoop学习笔记/YARN架构2.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/03/31/Hadoop学习笔记/mapreduce-process.png">
+<meta property="og:updated_time" content="2020-03-31T02:29:44.608Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hadoop学习笔记">
 <meta name="twitter:description" content="Hadoop简介Hadoop可运行于一般的商用服务器上，具有高容错、高可靠性、高扩展性等特点。特别适合写一次，读多次的场景。    HDFS：Hadoop Distributed File System 分布式文件存储系统 YARN：分布式资源管理 MapReduce：分布式计算 Others：利用YARN的资源管理功能实现其他的数据处理方式  HDFSHadoop Distributed Fil">
@@ -104,7 +108,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Hadoop简介"><span class="toc-number">1.</span> <span class="toc-text">Hadoop简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HDFS"><span class="toc-number">2.</span> <span class="toc-text">HDFS</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#架构"><span class="toc-number">2.1.</span> <span class="toc-text">架构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#写文件"><span class="toc-number">2.2.</span> <span class="toc-text">写文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#读文件"><span class="toc-number">2.3.</span> <span class="toc-text">读文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#可靠性"><span class="toc-number">2.4.</span> <span class="toc-text">可靠性</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#YARN"><span class="toc-number">3.</span> <span class="toc-text">YARN</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Hadoop简介"><span class="toc-number">1.</span> <span class="toc-text">Hadoop简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HDFS"><span class="toc-number">2.</span> <span class="toc-text">HDFS</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#架构"><span class="toc-number">2.1.</span> <span class="toc-text">架构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#写文件"><span class="toc-number">2.2.</span> <span class="toc-text">写文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#读文件"><span class="toc-number">2.3.</span> <span class="toc-text">读文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#可靠性"><span class="toc-number">2.4.</span> <span class="toc-text">可靠性</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#YARN"><span class="toc-number">3.</span> <span class="toc-text">YARN</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#旧MapReduce架构"><span class="toc-number">3.1.</span> <span class="toc-text">旧MapReduce架构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#YARN架构"><span class="toc-number">3.2.</span> <span class="toc-text">YARN架构</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MapReduce"><span class="toc-number">4.</span> <span class="toc-text">MapReduce</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -220,7 +224,33 @@
 <li><p>NameNode不可靠</p>
 </li>
 </ol>
-<h1 id="YARN"><a href="#YARN" class="headerlink" title="YARN"></a>YARN</h1>
+<h1 id="YARN"><a href="#YARN" class="headerlink" title="YARN"></a>YARN</h1><h2 id="旧MapReduce架构"><a href="#旧MapReduce架构" class="headerlink" title="旧MapReduce架构"></a>旧MapReduce架构</h2><center class="half"><br><img src="/2020/03/31/Hadoop学习笔记/旧MapReduce架构.jpg"><br></center>
+
+<ul>
+<li>JobTracker：作业生命周期管理（调度作业任务、跟踪进度、为任务提供容错）。</li>
+<li>TaskTracker：加载或关闭任务，定时报告任务状态。</li>
+</ul>
+<p><em>存在的问题：</em></p>
+<ol>
+<li>obTracker是MapReduce的集中处理点，存在单点故障。</li>
+<li>JobTracker完成了太多的任务，造成了过多的资源消耗，当MapReduce job 非常多的时候，会造成很大的内存开销。这也是业界普遍总结出老Hadoop的MapReduce只能支持4000 节点主机的上限。</li>
+<li>在TaskTracker端，以map/reduce task的数目作为资源的表示过于简单，没有考虑到cpu/ 内存的占用情况，如果两个大内存消耗的task被调度到了一块，很容易出现OOM（OutOfMemory）。</li>
+<li>在TaskTracker端，把资源强制划分为map task slot和reduce task slot, 如果当系统中只有map task或者只有reduce task的时候，会造成资源的浪费，也就集群资源利用的问题。</li>
+</ol>
+<h2 id="YARN架构"><a href="#YARN架构" class="headerlink" title="YARN架构"></a>YARN架构</h2><center class="half"><br><img src="/2020/03/31/Hadoop学习笔记/YARN架构1.jpg"><br><img src="/2020/03/31/Hadoop学习笔记/YARN架构2.jpg"><br></center>
+
+<p>YARN就是将JobTracker的职责进行拆分，将资源管理和任务调度监控拆分成独立#x7ACB;的进程：一个全局的资源管理和一个每个作业的管理（ApplicationMaster） ResourceManager和NodeManager提供了计算资源的分配和管理，而ApplicationMaster则完成应用程序的运行</p>
+<ul>
+<li><strong>ResourceManager:</strong> 全局资源管理和任务调度</li>
+<li><strong>NodeManager:</strong> 单个节点的资源管理和监控</li>
+<li><strong>ApplicationMaster:</strong> 单个作业的资源管理和任务监控</li>
+<li><strong>Container:</strong> 资源申请的单位和任务运行的容器</li>
+</ul>
+<h1 id="MapReduce"><a href="#MapReduce" class="headerlink" title="MapReduce"></a>MapReduce</h1><p>一种分布式的计算方式指定一个Map（映#x5C04;）函数，用来把一组键值对映射成一组新的键值对，指定并发的Reduce（归约）函数，用来保证所有映射的键值对中的每一个共享相同的键组。</p>
+<p><em>详细流程</em></p>
+<center class="half"><br><img src="/2020/03/31/Hadoop学习笔记/mapreduce-process.png"><br></center>
+
+
   </div>
 </article>
 
@@ -248,7 +278,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Hadoop简介"><span class="toc-number">1.</span> <span class="toc-text">Hadoop简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HDFS"><span class="toc-number">2.</span> <span class="toc-text">HDFS</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#架构"><span class="toc-number">2.1.</span> <span class="toc-text">架构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#写文件"><span class="toc-number">2.2.</span> <span class="toc-text">写文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#读文件"><span class="toc-number">2.3.</span> <span class="toc-text">读文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#可靠性"><span class="toc-number">2.4.</span> <span class="toc-text">可靠性</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#YARN"><span class="toc-number">3.</span> <span class="toc-text">YARN</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Hadoop简介"><span class="toc-number">1.</span> <span class="toc-text">Hadoop简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HDFS"><span class="toc-number">2.</span> <span class="toc-text">HDFS</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#架构"><span class="toc-number">2.1.</span> <span class="toc-text">架构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#写文件"><span class="toc-number">2.2.</span> <span class="toc-text">写文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#读文件"><span class="toc-number">2.3.</span> <span class="toc-text">读文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#可靠性"><span class="toc-number">2.4.</span> <span class="toc-text">可靠性</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#YARN"><span class="toc-number">3.</span> <span class="toc-text">YARN</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#旧MapReduce架构"><span class="toc-number">3.1.</span> <span class="toc-text">旧MapReduce架构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#YARN架构"><span class="toc-number">3.2.</span> <span class="toc-text">YARN架构</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MapReduce"><span class="toc-number">4.</span> <span class="toc-text">MapReduce</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
