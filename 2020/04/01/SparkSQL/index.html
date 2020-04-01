@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="Spark SQL架构  语言API Spark与不同的语言和Spark SQL兼容。 它也是由这些语言支持的API（python，scala，java，HiveQL）。 模式RDD Spark Core是使用称为RDD的特殊数据结构设计的。 通常，Spark SQL适用于模式，表和记录。 因此，我们可以使用Schema RDD作为临时表。 我们可以将此Schema RDD称为数据帧。 数据源 通">
+<meta name="keywords" content="code">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SparkSQL">
+<meta property="og:url" content="http://yoursite.com/2020/04/01/SparkSQL/index.html">
+<meta property="og:site_name" content="张文轩">
+<meta property="og:description" content="Spark SQL架构  语言API Spark与不同的语言和Spark SQL兼容。 它也是由这些语言支持的API（python，scala，java，HiveQL）。 模式RDD Spark Core是使用称为RDD的特殊数据结构设计的。 通常，Spark SQL适用于模式，表和记录。 因此，我们可以使用Schema RDD作为临时表。 我们可以将此Schema RDD称为数据帧。 数据源 通">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2020/04/01/SparkSQL/架构图.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/04/01/SparkSQL/RDD和DataFrame.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/01/SparkSQL/DataSet.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1367933/201810/1367933-20181025100740657-1854671955.png">
+<meta property="og:updated_time" content="2020-04-01T06:03:04.216Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SparkSQL">
+<meta name="twitter:description" content="Spark SQL架构  语言API Spark与不同的语言和Spark SQL兼容。 它也是由这些语言支持的API（python，scala，java，HiveQL）。 模式RDD Spark Core是使用称为RDD的特殊数据结构设计的。 通常，Spark SQL适用于模式，表和记录。 因此，我们可以使用Schema RDD作为临时表。 我们可以将此Schema RDD称为数据帧。 数据源 通">
+<meta name="twitter:image" content="http://yoursite.com/2020/04/01/SparkSQL/架构图.jpg">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>SparkSQL</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/Search/">搜索</a></li>
+         
+          <li><a href="/">主页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/posts/">博客</a></li>
+         
+          <li><a href="https://github.com/zhangwenxuan322">项目</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2020/03/31/Spark中的RDD/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2020/04/01/SparkSQL/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2020/04/01/SparkSQL/&text=SparkSQL"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2020/04/01/SparkSQL/&title=SparkSQL"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2020/04/01/SparkSQL/&is_video=false&description=SparkSQL"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=SparkSQL&body=Check out this article: http://yoursite.com/2020/04/01/SparkSQL/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2020/04/01/SparkSQL/&title=SparkSQL"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2020/04/01/SparkSQL/&title=SparkSQL"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2020/04/01/SparkSQL/&title=SparkSQL"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2020/04/01/SparkSQL/&title=SparkSQL"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2020/04/01/SparkSQL/&name=SparkSQL&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Spark-SQL"><span class="toc-number">1.</span> <span class="toc-text">Spark SQL</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#架构"><span class="toc-number">1.1.</span> <span class="toc-text">架构</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Spark-SQL的特点"><span class="toc-number">2.</span> <span class="toc-text">Spark SQL的特点</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#DataFrame和DataSet"><span class="toc-number">3.</span> <span class="toc-text">DataFrame和DataSet</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#主要介绍一下DataSet"><span class="toc-number">4.</span> <span class="toc-text">主要介绍一下DataSet</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        SparkSQL
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <span itemprop="name">张文轩</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2020-04-01T02:15:12.000Z" itemprop="datePublished">2020-04-01</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="Spark-SQL"><a href="#Spark-SQL" class="headerlink" title="Spark SQL"></a>Spark SQL</h1><h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><center class="half"><br><img src="/2020/04/01/SparkSQL/架构图.jpg"><br></center>
+
+<p><strong>语言API</strong></p>
+<p>Spark与不同的语言和Spark SQL兼容。 它也是由这些语言支持的API（python，scala，java，HiveQL）。</p>
+<p><strong>模式RDD</strong></p>
+<p>Spark Core是使用称为RDD的特殊数据结构设计的。 通常，Spark SQL适用于模式，表和记录。 因此，我们可以使用Schema RDD作为临时表。 我们可以将此Schema RDD称为数据帧。</p>
+<p><strong>数据源</strong></p>
+<p>通常spark-core的数据源是文本文件，Avro文件等。但是，Spark SQL的数据源不同。 这些是Parquet文件，JSON文档，HIVE表和Cassandra数据库。</p>
+<h1 id="Spark-SQL的特点"><a href="#Spark-SQL的特点" class="headerlink" title="Spark SQL的特点"></a>Spark SQL的特点</h1><ol>
+<li>容易集成</li>
+<li>统一的数据访问方式</li>
+<li>兼容Hive</li>
+</ol>
+<h1 id="DataFrame和DataSet"><a href="#DataFrame和DataSet" class="headerlink" title="DataFrame和DataSet"></a>DataFrame和DataSet</h1><ol>
+<li><p>DataFrame</p>
+<p>DataFrame是组织成命名列的<strong>数据集</strong>。它在概念上等同于关系数据库中的<strong>表</strong>，但在底层具有更丰富的优化。DataFrames可以从各种来源构建，</p>
+<p>例如：</p>
+<p>　　结构化数据文件</p>
+<p>　　hive中的表</p>
+<p>　　外部数据库或现有RDDs</p>
+<p>DataFrame API支持的语言有Scala，Java，Python和R。</p>
+<center class="half"><br><img src="/2020/04/01/SparkSQL/RDD和DataFrame.png"><br></center>
+
+<p>从上图可以看出，DataFrame多了数据的结构信息，<strong>即schema</strong>。RDD是分布式的 Java对象的集合。DataFrame是分布式的Row对象的集合。DataFrame除了提供了比RDD更丰富的算子以外，更重要的特点是提升执行效率、减少数据读取以及执行计划的优化。</p>
+</li>
+<li><p>DataSet</p>
+<p>Dataset是数据的分布式集合。Dataset是在Spark 1.6中添加的一个新接口，是DataFrame之上更高一级的抽象。它提供了RDD的优点（强类型化，使用强大的lambda函数的能力）以及Spark SQL优化后的执行引擎的优点。一个Dataset 可以从JVM对象构造，然后使用函数转换（map， flatMap，filter等）去操作。 Dataset API 支持Scala和Java。 Python不支持Dataset API。</p>
+</li>
+</ol>
+<h1 id="主要介绍一下DataSet"><a href="#主要介绍一下DataSet" class="headerlink" title="主要介绍一下DataSet"></a>主要介绍一下DataSet</h1><p>Dataset是一个分布式的数据收集器。这是在Spark1.6之后新加的一个接口，兼顾了RDD的优点（<strong>强类型</strong>，可以使用功能强大的lambda）以及Spark SQL的执行器高效性的优点。所以可以把DataFrames看成是一种特殊的Datasets，即：Dataset(Row)</p>
+<center class="half"><br><img src="/2020/04/01/SparkSQL/DataSet.png"><br></center>
+
+<p><strong>创建DataSet，方式一：使用序列</strong></p>
+<ol>
+<li><p>定义case class</p>
+<p><code>case class MyData(a:Int,b:String)</code></p>
+</li>
+<li><p>生成序列，并创建DataSet</p>
+<p><code>val ds = Seq(MyData(1,&quot;Tom&quot;),MyData(2,&quot;Mary&quot;)).toDS</code></p>
+</li>
+<li><p>查看结果<br><img src="https://img2018.cnblogs.com/blog/1367933/201810/1367933-20181025100740657-1854671955.png" alt="img"></p>
+</li>
+</ol>
+<p><strong>创建DataSet，方式二：使用JSON数据</strong></p>
+<ol>
+<li>定义case class</li>
+</ol>
+<p>​       <code>case class Person(name: String, gender: String)</code></p>
+<ol start="2">
+<li>通过JSON数据生成DataFrame</li>
+</ol>
+<p>​       <code>val df = spark.read.json(sc.parallelize(&quot;&quot;&quot;{&quot;gender&quot;: &quot;Male&quot;, &quot;name&quot;: &quot;Tom&quot;}&quot;&quot;&quot; :: Nil))</code></p>
+<ol start="3">
+<li>将DataFrame转成DataSet</li>
+</ol>
+<p>​       <code>df.as[Person].show</code></p>
+<p>​        <code>df.as[Person].collect</code></p>
+<p><strong>创建DataSet，方式三：使用HDFS数据</strong></p>
+<ol>
+<li>读取HDFS数据，并创建DataSet</li>
+</ol>
+<p>​        <code>val linesDS = spark.read.text(&quot;hdfs://hadoop111:9000/data/data.txt&quot;).as[String]</code> </p>
+<ol start="2">
+<li>对DataSet进行操作：分词后，查询长度大于3的单词</li>
+</ol>
+<p>​        <code>val words = linesDS.flatMap(_.split(&quot; &quot;)).filter(_.length &gt; 3)</code></p>
+<p>​        <code>words.show</code></p>
+<p>​        <code>words.collect</code></p>
+<ol start="3">
+<li>执行WordCount程序</li>
+</ol>
+<p>​       <code>val result = linesDS.flatMap(_.split(&quot; &quot;)).map((_,1)).groupByKey(x =&gt; x._1).count</code></p>
+<p>​       <code>result.show</code></p>
+<p>​       排序：<code>result.orderBy($&quot;value&quot;).show</code></p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/Search/">搜索</a></li>
+         
+          <li><a href="/">主页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/posts/">博客</a></li>
+         
+          <li><a href="https://github.com/zhangwenxuan322">项目</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Spark-SQL"><span class="toc-number">1.</span> <span class="toc-text">Spark SQL</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#架构"><span class="toc-number">1.1.</span> <span class="toc-text">架构</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Spark-SQL的特点"><span class="toc-number">2.</span> <span class="toc-text">Spark SQL的特点</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#DataFrame和DataSet"><span class="toc-number">3.</span> <span class="toc-text">DataFrame和DataSet</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#主要介绍一下DataSet"><span class="toc-number">4.</span> <span class="toc-text">主要介绍一下DataSet</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2020/04/01/SparkSQL/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2020/04/01/SparkSQL/&text=SparkSQL"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2020/04/01/SparkSQL/&title=SparkSQL"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2020/04/01/SparkSQL/&is_video=false&description=SparkSQL"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=SparkSQL&body=Check out this article: http://yoursite.com/2020/04/01/SparkSQL/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2020/04/01/SparkSQL/&title=SparkSQL"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2020/04/01/SparkSQL/&title=SparkSQL"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2020/04/01/SparkSQL/&title=SparkSQL"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2020/04/01/SparkSQL/&title=SparkSQL"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2020/04/01/SparkSQL/&name=SparkSQL&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2020 张文轩
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/Search/">搜索</a></li>
+         
+          <li><a href="/">主页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/posts/">博客</a></li>
+         
+          <li><a href="https://github.com/zhangwenxuan322">项目</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+    <!-- Google Analytics -->
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-37473492-6', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+
+
