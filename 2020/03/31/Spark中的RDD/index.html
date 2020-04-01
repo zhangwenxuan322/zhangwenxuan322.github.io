@@ -17,7 +17,9 @@
 <meta property="og:image" content="http://yoursite.com/2020/03/31/Spark中的RDD/RDD运作图.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/03/31/Spark中的RDD/RDD转换.PNG">
 <meta property="og:image" content="http://yoursite.com/2020/03/31/Spark中的RDD/RDD行动.PNG">
-<meta property="og:updated_time" content="2020-03-31T09:54:17.404Z">
+<meta property="og:image" content="http://yoursite.com/2020/03/31/Spark中的RDD/MapReduce迭代运算.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/03/31/Spark中的RDD/RDD迭代运算.jpg">
+<meta property="og:updated_time" content="2020-04-01T02:11:41.086Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spark中的RDD">
 <meta name="twitter:description" content="Spark RDDSpark 的核心是建立在统一的抽象弹性分布式数据集（Resiliennt Distributed Datasets，RDD）之上的，这使得 Spark 的各个组件可以无缝地进行集成，能够在同一个应用程序中完成大数据处理。 RDD概念可以将 RDD 理解为一个分布式对象集合，本质上是一个只读的分区记录集合。每个 RDD 可以分成多个分区，每个分区就是一个数据集片段。一个 RDD">
@@ -103,7 +105,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Spark-RDD"><span class="toc-number">1.</span> <span class="toc-text">Spark RDD</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#RDD概念"><span class="toc-number">2.</span> <span class="toc-text">RDD概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#RDD基本操作"><span class="toc-number">3.</span> <span class="toc-text">RDD基本操作</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Spark-RDD"><span class="toc-number">1.</span> <span class="toc-text">Spark RDD</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#RDD概念"><span class="toc-number">2.</span> <span class="toc-text">RDD概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#RDD基本操作"><span class="toc-number">3.</span> <span class="toc-text">RDD基本操作</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#RDD和MapReduce的区别"><span class="toc-number">4.</span> <span class="toc-text">RDD和MapReduce的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#MapReduce迭代运算"><span class="toc-number">4.1.</span> <span class="toc-text">MapReduce迭代运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Spark-RDD迭代运算"><span class="toc-number">4.2.</span> <span class="toc-text">Spark RDD迭代运算</span></a></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -168,12 +170,15 @@
 <li><p>行动操作</p>
 <center class="half"><br><img src="/2020/03/31/Spark中的RDD/RDD行动.PNG"><br></center>
 
-
-
-
-
 </li>
 </ol>
+<h1 id="RDD和MapReduce的区别"><a href="#RDD和MapReduce的区别" class="headerlink" title="RDD和MapReduce的区别"></a>RDD和MapReduce的区别</h1><p>RDD的概念是为了更快和更高效地实现MapReduce操作</p>
+<h2 id="MapReduce迭代运算"><a href="#MapReduce迭代运算" class="headerlink" title="MapReduce迭代运算"></a>MapReduce迭代运算</h2><p>在多阶段应用程序中跨多个计算重用中间结果。下图说明了当前框架如何工作，同时对MapReduce执行迭代操作。这会由于数据复制，磁盘I / O和序列化而招致大量开销，这使得系统变慢。</p>
+<center class="half"><br><img src="/2020/03/31/Spark中的RDD/MapReduce迭代运算.jpg"><br></center>
+
+<h2 id="Spark-RDD迭代运算"><a href="#Spark-RDD迭代运算" class="headerlink" title="Spark RDD迭代运算"></a>Spark RDD迭代运算</h2><p>下图给出了Spark RDD的迭代操作。<strong>它将中间结果存储在分布式存储器中，而不是稳定存储（磁盘）</strong>，并使系统更快。<br>注意 - 如果分布式内存（RAM）不足以存储中间结果（JOB的状态），则它将这些结果存储在磁盘上</p>
+<center class="half"><br><img src="/2020/03/31/Spark中的RDD/RDD迭代运算.jpg"><br></center>
+
 
   </div>
 </article>
@@ -202,7 +207,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Spark-RDD"><span class="toc-number">1.</span> <span class="toc-text">Spark RDD</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#RDD概念"><span class="toc-number">2.</span> <span class="toc-text">RDD概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#RDD基本操作"><span class="toc-number">3.</span> <span class="toc-text">RDD基本操作</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Spark-RDD"><span class="toc-number">1.</span> <span class="toc-text">Spark RDD</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#RDD概念"><span class="toc-number">2.</span> <span class="toc-text">RDD概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#RDD基本操作"><span class="toc-number">3.</span> <span class="toc-text">RDD基本操作</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#RDD和MapReduce的区别"><span class="toc-number">4.</span> <span class="toc-text">RDD和MapReduce的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#MapReduce迭代运算"><span class="toc-number">4.1.</span> <span class="toc-text">MapReduce迭代运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Spark-RDD迭代运算"><span class="toc-number">4.2.</span> <span class="toc-text">Spark RDD迭代运算</span></a></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
