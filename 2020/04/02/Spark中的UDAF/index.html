@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="无类型的用户自定于聚合函数（Untyped User-Defined Aggregate Functions）测试数据Itemdata.data 123456789101112130162381440670851711,4,7.00162381440670851711,11,4.00162381440670851711,32,1.00162381440670851711,176,27.001623">
+<meta name="keywords" content="code">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spark中的UDAF">
+<meta property="og:url" content="http://yoursite.com/2020/04/02/Spark中的UDAF/index.html">
+<meta property="og:site_name" content="张文轩">
+<meta property="og:description" content="无类型的用户自定于聚合函数（Untyped User-Defined Aggregate Functions）测试数据Itemdata.data 123456789101112130162381440670851711,4,7.00162381440670851711,11,4.00162381440670851711,32,1.00162381440670851711,176,27.001623">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-04-02T02:08:46.722Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spark中的UDAF">
+<meta name="twitter:description" content="无类型的用户自定于聚合函数（Untyped User-Defined Aggregate Functions）测试数据Itemdata.data 123456789101112130162381440670851711,4,7.00162381440670851711,11,4.00162381440670851711,32,1.00162381440670851711,176,27.001623">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Spark中的UDAF</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/Search/">搜索</a></li>
+         
+          <li><a href="/">主页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/posts/">博客</a></li>
+         
+          <li><a href="https://github.com/zhangwenxuan322">项目</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2020/04/01/SparkSQL/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2020/04/02/Spark中的UDAF/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2020/04/02/Spark中的UDAF/&text=Spark中的UDAF"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2020/04/02/Spark中的UDAF/&title=Spark中的UDAF"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2020/04/02/Spark中的UDAF/&is_video=false&description=Spark中的UDAF"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Spark中的UDAF&body=Check out this article: http://yoursite.com/2020/04/02/Spark中的UDAF/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2020/04/02/Spark中的UDAF/&title=Spark中的UDAF"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2020/04/02/Spark中的UDAF/&title=Spark中的UDAF"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2020/04/02/Spark中的UDAF/&title=Spark中的UDAF"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2020/04/02/Spark中的UDAF/&title=Spark中的UDAF"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2020/04/02/Spark中的UDAF/&name=Spark中的UDAF&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#无类型的用户自定于聚合函数（Untyped-User-Defined-Aggregate-Functions）"><span class="toc-number">1.</span> <span class="toc-text">无类型的用户自定于聚合函数（Untyped User-Defined Aggregate Functions）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#测试数据"><span class="toc-number">1.1.</span> <span class="toc-text">测试数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#inputSchema"><span class="toc-number">1.2.</span> <span class="toc-text">inputSchema</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bufferSchema"><span class="toc-number">1.3.</span> <span class="toc-text">bufferSchema</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#dataType"><span class="toc-number">1.4.</span> <span class="toc-text">dataType</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#deterministic"><span class="toc-number">1.5.</span> <span class="toc-text">deterministic</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#initialize"><span class="toc-number">1.6.</span> <span class="toc-text">initialize</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#update"><span class="toc-number">1.7.</span> <span class="toc-text">update</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#merge"><span class="toc-number">1.8.</span> <span class="toc-text">merge</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#evaluate"><span class="toc-number">1.9.</span> <span class="toc-text">evaluate</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#源代码"><span class="toc-number">1.10.</span> <span class="toc-text">源代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#运行结果"><span class="toc-number">1.11.</span> <span class="toc-text">运行结果</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Spark中的UDAF
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <span itemprop="name">张文轩</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2020-04-02T02:00:29.000Z" itemprop="datePublished">2020-04-02</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="无类型的用户自定于聚合函数（Untyped-User-Defined-Aggregate-Functions）"><a href="#无类型的用户自定于聚合函数（Untyped-User-Defined-Aggregate-Functions）" class="headerlink" title="无类型的用户自定于聚合函数（Untyped User-Defined Aggregate Functions）"></a>无类型的用户自定于聚合函数（Untyped User-Defined Aggregate Functions）</h1><h2 id="测试数据"><a href="#测试数据" class="headerlink" title="测试数据"></a>测试数据</h2><p>Itemdata.data</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">0162381440670851711,4,7.0</span><br><span class="line">0162381440670851711,11,4.0</span><br><span class="line">0162381440670851711,32,1.0</span><br><span class="line">0162381440670851711,176,27.0</span><br><span class="line">0162381440670851711,183,11.0</span><br><span class="line">0162381440670851711,184,5.0</span><br><span class="line">0162381440670851711,207,9.0</span><br><span class="line">0162381440670851711,256,3.0</span><br><span class="line">0162381440670851711,258,4.0</span><br><span class="line">0162381440670851711,259,16.0</span><br><span class="line">0162381440670851711,260,8.0</span><br><span class="line">0162381440670851711,261,18.0</span><br><span class="line">0162381440670851711,301,1.0</span><br></pre></td></tr></table></figure>
+<p>无类型的用户自定于聚合函数需要继承抽象类UserDefinedAggregateFunction，并重写该类的8个函数</p>
+<h2 id="inputSchema"><a href="#inputSchema" class="headerlink" title="inputSchema"></a>inputSchema</h2><p> 定义输入数据的Schema，要求类型是StructType，它的参数是由StructField类型构成的数组。</p>
+<h2 id="bufferSchema"><a href="#bufferSchema" class="headerlink" title="bufferSchema"></a>bufferSchema</h2><p>计算平均数需要用到总和sum和总个数count，bufferSchema用来接收中间计算数据。</p>
+<h2 id="dataType"><a href="#dataType" class="headerlink" title="dataType"></a>dataType</h2><p>申明返回值的类型</p>
+<h2 id="deterministic"><a href="#deterministic" class="headerlink" title="deterministic"></a>deterministic</h2><p>对输入数据进行一致性检验，是一个布尔值，当为true时，表示对于同样的输入会得到同样的输出。</p>
+<h2 id="initialize"><a href="#initialize" class="headerlink" title="initialize"></a>initialize</h2><p>初始化缓存数据。比如score的缓存数据有两个：sum和count，需要初始化为sum=0.0和count=0L。</p>
+<h2 id="update"><a href="#update" class="headerlink" title="update"></a>update</h2><p>更新缓存变量。比如这里当有新的score输入时，需要将它的值更新变量sum中，并将count加1。</p>
+<h2 id="merge"><a href="#merge" class="headerlink" title="merge"></a>merge</h2><p>将更新的缓存变量存入到缓存中。</p>
+<h2 id="evaluate"><a href="#evaluate" class="headerlink" title="evaluate"></a>evaluate</h2><p>用于计算我们的最终结果。</p>
+<h2 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h2><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.spark.sql.&#123;<span class="type">Row</span>, <span class="type">SparkSession</span>&#125;</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.sql.expressions.&#123;<span class="type">MutableAggregationBuffer</span>, <span class="type">UserDefinedAggregateFunction</span>&#125;</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.sql.types.&#123;<span class="type">DataType</span>, <span class="type">DoubleType</span>, <span class="type">LongType</span>, <span class="type">StructField</span>, <span class="type">StructType</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 自定义算子测试类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">UDAFTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 计算平均score</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">MyUDAF</span> <span class="keyword">extends</span> <span class="title">UserDefinedAggregateFunction</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 计算平均score，输入的应该是score这一列数据</span></span><br><span class="line"><span class="comment">     * StructField定义了列字段的名称score_column,字段的类型Double</span></span><br><span class="line"><span class="comment">     * StructType要求输入数StructField构成的数组Array，这里只有一列，所以与Nil运算生成Array</span></span><br><span class="line"><span class="comment">     * @return StructType</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">inputSchema</span></span>: <span class="type">StructType</span> =</span><br><span class="line">      <span class="type">StructType</span>(</span><br><span class="line">        <span class="type">StructField</span>(<span class="string">"score_column"</span>, <span class="type">DoubleType</span>) ::</span><br><span class="line">          <span class="type">Nil</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 缓存Schema，存储中间计算结果，</span></span><br><span class="line"><span class="comment">     * 比如计算平均score,需要计算score的总和和score的个数,然后average(score)=sum(score)/count(score)</span></span><br><span class="line"><span class="comment">     * 所以这里定义了StructType类型：两个StructField字段：sum和count</span></span><br><span class="line"><span class="comment">     * @return StructType</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">bufferSchema</span></span>: <span class="type">StructType</span> =</span><br><span class="line">      <span class="type">StructType</span>(</span><br><span class="line">        <span class="type">StructField</span>(<span class="string">"sum"</span>, <span class="type">DoubleType</span>) ::</span><br><span class="line">        <span class="type">StructField</span>(<span class="string">"count"</span>, <span class="type">LongType</span>) ::</span><br><span class="line">        <span class="type">Nil</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 自定义集成算子最终返回的数据类型</span></span><br><span class="line"><span class="comment">     * 也就是average(score)的类型，所以是Double</span></span><br><span class="line"><span class="comment">     * @return DataType 返回数据类型</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">dataType</span></span>: <span class="type">DataType</span> = <span class="type">DoubleType</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 数据一致性检验：对于同样的输入，输出是一样的</span></span><br><span class="line"><span class="comment">     * @return Boolean true 同样的输入，输出也一样</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">deterministic</span></span>: <span class="type">Boolean</span> = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 初始化缓存sum和count</span></span><br><span class="line"><span class="comment">     * sum=0.0，count=0</span></span><br><span class="line"><span class="comment">     * @param buffer 中间数据</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">initialize</span></span>(buffer: <span class="type">MutableAggregationBuffer</span>): <span class="type">Unit</span> = &#123;</span><br><span class="line">      buffer(<span class="number">0</span>) = <span class="number">0.0</span></span><br><span class="line">      buffer(<span class="number">1</span>) = <span class="number">0</span>L</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 每次计算更新缓存</span></span><br><span class="line"><span class="comment">     * @param buffer 缓存数据</span></span><br><span class="line"><span class="comment">     * @param input 输入数据score</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">update</span></span>(buffer: <span class="type">MutableAggregationBuffer</span>, input: <span class="type">Row</span>): <span class="type">Unit</span> = &#123;</span><br><span class="line">      <span class="keyword">if</span> (!input.isNullAt(<span class="number">0</span>)) &#123;</span><br><span class="line">        buffer(<span class="number">0</span>) = buffer.getDouble(<span class="number">0</span>) + input.getDouble(<span class="number">0</span>)</span><br><span class="line">        buffer(<span class="number">1</span>) = buffer.getLong(<span class="number">1</span>) + <span class="number">1</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 将更新后的buffer存储到缓存</span></span><br><span class="line"><span class="comment">     * @param buffer1 缓存</span></span><br><span class="line"><span class="comment">     * @param buffer2 更新后的buffer</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">merge</span></span>(buffer1: <span class="type">MutableAggregationBuffer</span>, buffer2: <span class="type">Row</span>): <span class="type">Unit</span> = &#123;</span><br><span class="line">      buffer1(<span class="number">0</span>) = buffer1.getDouble(<span class="number">0</span>) + buffer2.getDouble(<span class="number">0</span>)</span><br><span class="line">      buffer1(<span class="number">1</span>) = buffer1.getLong(<span class="number">1</span>) + buffer2.getLong(<span class="number">1</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 计算最终的结果：average(score)=sum(score)/count(score)</span></span><br><span class="line"><span class="comment">     * @param buffer</span></span><br><span class="line"><span class="comment">     * @return</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">evaluate</span></span>(buffer: <span class="type">Row</span>): <span class="type">Any</span> =</span><br><span class="line">      buffer.getDouble(<span class="number">0</span>) / buffer.getLong(<span class="number">1</span>)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args: <span class="type">Array</span>[<span class="type">String</span>]): <span class="type">Unit</span> = &#123;</span><br><span class="line">    <span class="keyword">val</span> spark = <span class="type">SparkSession</span>.builder()</span><br><span class="line">      .master(<span class="string">"local"</span>)</span><br><span class="line">      .appName(<span class="string">"UDAF-Test"</span>)</span><br><span class="line">      .getOrCreate()</span><br><span class="line">    spark.udf.register(<span class="string">"myUDAF"</span>, <span class="keyword">new</span> <span class="type">MyUDAF</span>)</span><br><span class="line">    <span class="keyword">val</span> df = spark.read.csv(<span class="string">"itemdata.data"</span>).toDF(<span class="string">"user_id"</span>, <span class="string">"item_id"</span>, <span class="string">"score"</span>)</span><br><span class="line">    df.createOrReplaceTempView(<span class="string">"data"</span>)</span><br><span class="line">    spark.sql(<span class="string">"select myUDAF(score) as avg_score from data"</span>).show()</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">+----------------+</span><br><span class="line">|       avg_score|</span><br><span class="line">+----------------+</span><br><span class="line">|8.76923076923077|</span><br><span class="line">+----------------+</span><br></pre></td></tr></table></figure>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/Search/">搜索</a></li>
+         
+          <li><a href="/">主页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/posts/">博客</a></li>
+         
+          <li><a href="https://github.com/zhangwenxuan322">项目</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#无类型的用户自定于聚合函数（Untyped-User-Defined-Aggregate-Functions）"><span class="toc-number">1.</span> <span class="toc-text">无类型的用户自定于聚合函数（Untyped User-Defined Aggregate Functions）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#测试数据"><span class="toc-number">1.1.</span> <span class="toc-text">测试数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#inputSchema"><span class="toc-number">1.2.</span> <span class="toc-text">inputSchema</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bufferSchema"><span class="toc-number">1.3.</span> <span class="toc-text">bufferSchema</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#dataType"><span class="toc-number">1.4.</span> <span class="toc-text">dataType</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#deterministic"><span class="toc-number">1.5.</span> <span class="toc-text">deterministic</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#initialize"><span class="toc-number">1.6.</span> <span class="toc-text">initialize</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#update"><span class="toc-number">1.7.</span> <span class="toc-text">update</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#merge"><span class="toc-number">1.8.</span> <span class="toc-text">merge</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#evaluate"><span class="toc-number">1.9.</span> <span class="toc-text">evaluate</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#源代码"><span class="toc-number">1.10.</span> <span class="toc-text">源代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#运行结果"><span class="toc-number">1.11.</span> <span class="toc-text">运行结果</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2020/04/02/Spark中的UDAF/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2020/04/02/Spark中的UDAF/&text=Spark中的UDAF"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2020/04/02/Spark中的UDAF/&title=Spark中的UDAF"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2020/04/02/Spark中的UDAF/&is_video=false&description=Spark中的UDAF"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Spark中的UDAF&body=Check out this article: http://yoursite.com/2020/04/02/Spark中的UDAF/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2020/04/02/Spark中的UDAF/&title=Spark中的UDAF"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2020/04/02/Spark中的UDAF/&title=Spark中的UDAF"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2020/04/02/Spark中的UDAF/&title=Spark中的UDAF"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2020/04/02/Spark中的UDAF/&title=Spark中的UDAF"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2020/04/02/Spark中的UDAF/&name=Spark中的UDAF&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2020 张文轩
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/Search/">搜索</a></li>
+         
+          <li><a href="/">主页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/posts/">博客</a></li>
+         
+          <li><a href="https://github.com/zhangwenxuan322">项目</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+    <!-- Google Analytics -->
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-37473492-6', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+
+
