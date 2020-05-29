@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="大数据历史 2004年 Google的三篇论文为大数据发展打下基础，这三篇论文分别为：  分布式文件系统GFS 大数据分布式计算框架MapReduce NoSQL类型数据库BigTable   2006年 Doug Cutting启动了一个赫赫有名的项目：Hadoop，主要包括Hadoop分布式文件系统HDFS和大数据计算引擎MapReduce，分别实现了GFS和MapReduce其中两篇论文">
+<meta name="keywords" content="code">
+<meta property="og:type" content="article">
+<meta property="og:title" content="大数据历史发展以及未来架构路线">
+<meta property="og:url" content="http://yoursite.com/2020/05/29/大数据历史发展以及未来架构路线/index.html">
+<meta property="og:site_name" content="张文轩">
+<meta property="og:description" content="大数据历史 2004年 Google的三篇论文为大数据发展打下基础，这三篇论文分别为：  分布式文件系统GFS 大数据分布式计算框架MapReduce NoSQL类型数据库BigTable   2006年 Doug Cutting启动了一个赫赫有名的项目：Hadoop，主要包括Hadoop分布式文件系统HDFS和大数据计算引擎MapReduce，分别实现了GFS和MapReduce其中两篇论文">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2020/05/29/大数据历史发展以及未来架构路线/Big%20Data%20Archtecture.png">
+<meta property="og:updated_time" content="2020-05-29T02:34:52.406Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="大数据历史发展以及未来架构路线">
+<meta name="twitter:description" content="大数据历史 2004年 Google的三篇论文为大数据发展打下基础，这三篇论文分别为：  分布式文件系统GFS 大数据分布式计算框架MapReduce NoSQL类型数据库BigTable   2006年 Doug Cutting启动了一个赫赫有名的项目：Hadoop，主要包括Hadoop分布式文件系统HDFS和大数据计算引擎MapReduce，分别实现了GFS和MapReduce其中两篇论文">
+<meta name="twitter:image" content="http://yoursite.com/2020/05/29/大数据历史发展以及未来架构路线/Big%20Data%20Archtecture.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>大数据历史发展以及未来架构路线</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/Search/">搜索</a></li>
+         
+          <li><a href="/">主页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/posts/">博客</a></li>
+         
+          <li><a href="https://github.com/zhangwenxuan322">项目</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2020/05/20/项目打包到阿里云运行并停止的流程/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2020/05/29/大数据历史发展以及未来架构路线/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2020/05/29/大数据历史发展以及未来架构路线/&text=大数据历史发展以及未来架构路线"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2020/05/29/大数据历史发展以及未来架构路线/&title=大数据历史发展以及未来架构路线"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2020/05/29/大数据历史发展以及未来架构路线/&is_video=false&description=大数据历史发展以及未来架构路线"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=大数据历史发展以及未来架构路线&body=Check out this article: http://yoursite.com/2020/05/29/大数据历史发展以及未来架构路线/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2020/05/29/大数据历史发展以及未来架构路线/&title=大数据历史发展以及未来架构路线"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2020/05/29/大数据历史发展以及未来架构路线/&title=大数据历史发展以及未来架构路线"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2020/05/29/大数据历史发展以及未来架构路线/&title=大数据历史发展以及未来架构路线"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2020/05/29/大数据历史发展以及未来架构路线/&title=大数据历史发展以及未来架构路线"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2020/05/29/大数据历史发展以及未来架构路线/&name=大数据历史发展以及未来架构路线&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#大数据历史"><span class="toc-number">1.</span> <span class="toc-text">大数据历史</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#大数据架构"><span class="toc-number">2.</span> <span class="toc-text">大数据架构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#大数据未来发展"><span class="toc-number">3.</span> <span class="toc-text">大数据未来发展</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-number">4.</span> <span class="toc-text">参考资料</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        大数据历史发展以及未来架构路线
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <span itemprop="name">张文轩</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2020-05-29T01:31:20.000Z" itemprop="datePublished">2020-05-29</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="大数据历史"><a href="#大数据历史" class="headerlink" title="大数据历史"></a>大数据历史</h1><ul>
+<li><p>2004年</p>
+<p>Google的三篇论文为大数据发展打下基础，这三篇论文分别为：</p>
+<ol>
+<li>分布式文件系统GFS</li>
+<li>大数据分布式计算框架MapReduce</li>
+<li>NoSQL类型数据库BigTable</li>
+</ol>
+</li>
+<li><p>2006年</p>
+<p>Doug Cutting启动了一个赫赫有名的项目：Hadoop，主要包括Hadoop分布式文件系统HDFS和大数据计算引擎MapReduce，分别实现了GFS和MapReduce其中两篇论文</p>
+</li>
+<li><p>2007年</p>
+<p>HBase诞生，实现了三篇论文中的最后一篇BigTable</p>
+</li>
+<li><p>2008年</p>
+<p>出现 了Pig、Hive，支持使用SQL语法来进行大数据计算，极大的降低了Hadoop的使用难度，数据分析师和工程师可以无门槛的对大数据进行数据分析和处理</p>
+</li>
+<li><p>2012年</p>
+<p>Haddop将执行引擎和资源调度分离出来，成立了Yarn资源调度系统，这年Spark也开始崭露头角，逐步替代MapReduce在企业应用中的地位</p>
+</li>
+</ul>
+<h1 id="大数据架构"><a href="#大数据架构" class="headerlink" title="大数据架构"></a>大数据架构</h1><p>首先需要明确的是什么样的项目需要使用到大数据解决方案。如果数据只是GB级的项目，数据源单一的项目，并没有必要使用大数据解决方案。只有数据量达到TB或者PB并且数据有持续大量增加的可能性并且有多个数据源的情况下，才有必要使用大数据。</p>
+<center class="half"><br><img src="/2020/05/29/大数据历史发展以及未来架构路线/Big Data Archtecture.png"><br></center>
+
+<p>上图简单划分了大数据的架构设计，主要分为以下几层：</p>
+<ol>
+<li><p>数据来源层(Sources Layer)</p>
+<p>该架构的设计在很大程度上取决于数据源。这些数据是从许多不同格式的数据来源获取的，这些来源包括关系型数据库，企业服务器和传感器，如物联网设备，第三方数据提供商等，这些数据既可以是批量数据也可以是实时数据。</p>
+</li>
+<li><p>数据注入层(Data Ingestion Layer)</p>
+<p>这是大数据开始旅程的第一层。该层将数据进行归类整理并传输给之后的层次。一般来说，这一层的数据可以通过像Kafka这样的消息队列或者是通过REST Api的形式进行传递。</p>
+</li>
+<li><p>存储层(Storage Layer)</p>
+<p>这一层是大数据的接收端，它用在最合适的方式接收各种数据源，并将其存储。该层甚至可以根据系统的要求改变数据的格式。例如，批处理数据通常存储在分布式文件存储系统诸如HDFS等，在另一方面，结构化数据只能使用RDBMS来存储，这一切都取决于数据的格式。</p>
+</li>
+<li><p>分析层(Analysis Layer)</p>
+<p>采用大数据的公司的唯一目标就是从数据中获得洞察力，从而进行数据驱动的决策。为了使用户分析大数据，在大数据架构中最重要的一层是分析层。这层与存储层交互，该架构需要多种工具来分析大数据。结构化数据是很容易处理的，而分析非结构化数据需要进行一些先进的工具。</p>
+</li>
+<li><p>批处理(Batch Processing)</p>
+<p>由于数据量非常大，该架构需要一个批式处理系统去过滤、聚合以及处理数据以便于高级分析。这些都是长期运行的批处理作业，涉及到从存储层读取数据、处理、最后写入输出到新文件，批处理目前主要采用Spark来解决。</p>
+</li>
+<li><p>流处理(Real-Time Processing)</p>
+<p>处理实时数据是在大数据世界里最热的潮流。流处理需要有一个系统来捕捉和存储实时数据，目前最好的解决方案是Flink，并且在未来Flink有代替Spark做批处理作业的趋势。</p>
+</li>
+<li><p>商业分析层(BI Layer)</p>
+<p>这一层对接收到的最终数据进行分析，主要由人来进行决策。</p>
+</li>
+</ol>
+<h1 id="大数据未来发展"><a href="#大数据未来发展" class="headerlink" title="大数据未来发展"></a>大数据未来发展</h1><p>大数据发展的十多年来，数据一直呈现成倍上涨并且没有放缓的趋势。这些数据的聚集主要是通过互联网，包括社交网络，网页搜索请求，文本消息和媒体文件。数据的另一巨大份额是通过物联网装置和传感器获取的。这些数据的大量增长带动了经济发展，根据Statista的调查，这部分经济增长已经达到了490亿美元。</p>
+<p>对于未来大数据方向有以下预测：</p>
+<ol>
+<li>数据量将继续增加，并且数据将向云迁移</li>
+<li>机器学习将会在大数据领域中越来越重要</li>
+<li>数据科学家将在高需求</li>
+<li>隐私仍将是一个热点问题</li>
+<li>流处理将占据主导地位</li>
+</ol>
+<p>就我所在的公司而言，目前也有将大数据批处理引擎从Spark迁移到Flink的趋势，Flink发展迅速，在短时间内就成为了Apache基金会下的顶级项目，再加上背后有大公司对开源社区的支持，Flink无疑是未来更好的选择。</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+<li><p>大数据历史</p>
+<p><a href="https://www.cnblogs.com/chenqionghe/p/11375295.html" target="_blank" rel="noopener">https://www.cnblogs.com/chenqionghe/p/11375295.html</a></p>
+</li>
+<li><p>大数据架构</p>
+<p><a href="https://towardsdatascience.com/big-data-architecture-the-art-of-handling-big-data-bc565c3a7295" target="_blank" rel="noopener">https://towardsdatascience.com/big-data-architecture-the-art-of-handling-big-data-bc565c3a7295</a></p>
+</li>
+<li><p>大数据未来发展</p>
+<p><a href="https://www.itransition.com/blog/the-future-of-big-data" target="_blank" rel="noopener">https://www.itransition.com/blog/the-future-of-big-data</a></p>
+</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/Search/">搜索</a></li>
+         
+          <li><a href="/">主页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/posts/">博客</a></li>
+         
+          <li><a href="https://github.com/zhangwenxuan322">项目</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#大数据历史"><span class="toc-number">1.</span> <span class="toc-text">大数据历史</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#大数据架构"><span class="toc-number">2.</span> <span class="toc-text">大数据架构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#大数据未来发展"><span class="toc-number">3.</span> <span class="toc-text">大数据未来发展</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-number">4.</span> <span class="toc-text">参考资料</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2020/05/29/大数据历史发展以及未来架构路线/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2020/05/29/大数据历史发展以及未来架构路线/&text=大数据历史发展以及未来架构路线"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2020/05/29/大数据历史发展以及未来架构路线/&title=大数据历史发展以及未来架构路线"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2020/05/29/大数据历史发展以及未来架构路线/&is_video=false&description=大数据历史发展以及未来架构路线"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=大数据历史发展以及未来架构路线&body=Check out this article: http://yoursite.com/2020/05/29/大数据历史发展以及未来架构路线/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2020/05/29/大数据历史发展以及未来架构路线/&title=大数据历史发展以及未来架构路线"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2020/05/29/大数据历史发展以及未来架构路线/&title=大数据历史发展以及未来架构路线"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2020/05/29/大数据历史发展以及未来架构路线/&title=大数据历史发展以及未来架构路线"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2020/05/29/大数据历史发展以及未来架构路线/&title=大数据历史发展以及未来架构路线"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2020/05/29/大数据历史发展以及未来架构路线/&name=大数据历史发展以及未来架构路线&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2020 张文轩
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/Search/">搜索</a></li>
+         
+          <li><a href="/">主页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/posts/">博客</a></li>
+         
+          <li><a href="https://github.com/zhangwenxuan322">项目</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+    <!-- Google Analytics -->
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-37473492-6', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+
+
