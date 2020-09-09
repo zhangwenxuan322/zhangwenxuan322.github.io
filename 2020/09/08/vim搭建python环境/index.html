@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="张文轩">
 <meta property="og:description" content="VIm和Python3 如果用的是macOS，并且是系统自带的Vim，那么它默认是不支持Python3的，可以通过vim --version | grep python查看。 那么首先就是要安装一个支持Python3的Vim，这里brew提供了支持，通过brew安装的Vim默认支持Python3，安装语句brew install vim。同时Mac自带的是Python2，所以还需要安装Pytho">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-09-08T12:49:44.934Z">
+<meta property="og:updated_time" content="2020-09-09T01:27:05.008Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vim搭建python环境">
 <meta name="twitter:description" content="VIm和Python3 如果用的是macOS，并且是系统自带的Vim，那么它默认是不支持Python3的，可以通过vim --version | grep python查看。 那么首先就是要安装一个支持Python3的Vim，这里brew提供了支持，通过brew安装的Vim默认支持Python3，安装语句brew install vim。同时Mac自带的是Python2，所以还需要安装Pytho">
@@ -144,6 +144,13 @@
 <li>完成上述操作后即可用which命令查看调用的vim和python3来源。</li>
 </ol>
 </li>
+<li><p>Mac上Vim中内容复制到其他程序</p>
+<p>在.vimrc中配置：<code>set clipboard=unnamed</code></p>
+</li>
+<li><p>Vim中直接运行Python文件</p>
+<p>在.vimrc中配置如下内容：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">" Python相关</span></span><br><span class="line"><span class="string">filetype plugin on</span></span><br><span class="line"><span class="string">"</span> 按 F5 执行当前 Python 代码<span class="string">"</span></span><br><span class="line"><span class="string">map &lt;F5&gt; :call PRUN()&lt;CR&gt;</span></span><br><span class="line"><span class="string">func! PRUN()</span></span><br><span class="line"><span class="string">    exec "</span>w<span class="string">"</span></span><br><span class="line"><span class="string">    if &amp;filetype == 'python'</span></span><br><span class="line"><span class="string">        exec "</span>!python3 %<span class="string">"</span></span><br><span class="line"><span class="string">    endif</span></span><br><span class="line"><span class="string">endfunc</span></span><br></pre></td></tr></table></figure>
+</li>
 <li><p>Vim插件</p>
 <p>推荐使用vim-plug进行Vim的插件管理，安装步骤如下：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/.vim/autoload/</span><br><span class="line">cd ~/.vim/autoload/</span><br><span class="line">wget https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim</span><br></pre></td></tr></table></figure>
@@ -154,8 +161,6 @@
 </li>
 <li><p>关于jedi-vim插件无法联想第三方库文件的问题</p>
 <p>这个问题真是困扰了我一个下午，查找了很多资料，本来以为是macOS的问题，结果看到官方的一个<a href="https://github.com/davidhalter/jedi/issues/1188" target="_blank" rel="noopener">issue</a>上面提到jedi-vim还不支持Python3.7的第三方库查询，但是这个issue是两年前提出的并且作者说会在4-5个月内完成，不知道为什么还不支持：）。不过如果按照我上面的操作是不会遇到这个问题的，因为brew默认安装Python3.8，我之前用的是Python3.7。</p>
-</li>
-<li><p>持续更新中。。。</p>
 </li>
 </ul>
 
