@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="今天在尝试用Python连接Oracle数据库时遇到一个报错： 1cx_Oracle.DatabaseError: DPI-1047: Cannot locate a 64-bit Oracle Client library: &amp;quot;dlopen(libclntsh.dylib, 1): no suitable image found. 大致是需要一个64位的Oracle客户端，而我的Mac">
+<meta name="keywords" content="code">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何突破macOS的文件安全权限限制">
+<meta property="og:url" content="http://yoursite.com/2020/09/10/如何突破macOS的文件安全权限限制/index.html">
+<meta property="og:site_name" content="张文轩">
+<meta property="og:description" content="今天在尝试用Python连接Oracle数据库时遇到一个报错： 1cx_Oracle.DatabaseError: DPI-1047: Cannot locate a 64-bit Oracle Client library: &amp;quot;dlopen(libclntsh.dylib, 1): no suitable image found. 大致是需要一个64位的Oracle客户端，而我的Mac">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2020/09/10/如何突破macOS的文件安全权限限制/Users/zhangwenxuan/hexo1/source/_posts/如何突破macOS的文件安全权限限制/security.png">
+<meta property="og:updated_time" content="2020-09-10T07:18:03.056Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="如何突破macOS的文件安全权限限制">
+<meta name="twitter:description" content="今天在尝试用Python连接Oracle数据库时遇到一个报错： 1cx_Oracle.DatabaseError: DPI-1047: Cannot locate a 64-bit Oracle Client library: &amp;quot;dlopen(libclntsh.dylib, 1): no suitable image found. 大致是需要一个64位的Oracle客户端，而我的Mac">
+<meta name="twitter:image" content="http://yoursite.com/2020/09/10/如何突破macOS的文件安全权限限制/Users/zhangwenxuan/hexo1/source/_posts/如何突破macOS的文件安全权限限制/security.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>如何突破macOS的文件安全权限限制</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/Search/">搜索</a></li>
+         
+          <li><a href="/">主页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/posts/">博客</a></li>
+         
+          <li><a href="https://github.com/zhangwenxuan322">项目</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2020/09/08/vim搭建python环境/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2020/09/10/如何突破macOS的文件安全权限限制/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2020/09/10/如何突破macOS的文件安全权限限制/&text=如何突破macOS的文件安全权限限制"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2020/09/10/如何突破macOS的文件安全权限限制/&title=如何突破macOS的文件安全权限限制"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2020/09/10/如何突破macOS的文件安全权限限制/&is_video=false&description=如何突破macOS的文件安全权限限制"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=如何突破macOS的文件安全权限限制&body=Check out this article: http://yoursite.com/2020/09/10/如何突破macOS的文件安全权限限制/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2020/09/10/如何突破macOS的文件安全权限限制/&title=如何突破macOS的文件安全权限限制"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2020/09/10/如何突破macOS的文件安全权限限制/&title=如何突破macOS的文件安全权限限制"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2020/09/10/如何突破macOS的文件安全权限限制/&title=如何突破macOS的文件安全权限限制"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2020/09/10/如何突破macOS的文件安全权限限制/&title=如何突破macOS的文件安全权限限制"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2020/09/10/如何突破macOS的文件安全权限限制/&name=如何突破macOS的文件安全权限限制&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        如何突破macOS的文件安全权限限制
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <span itemprop="name">张文轩</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2020-09-10T06:59:55.000Z" itemprop="datePublished">2020-09-10</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>今天在尝试用Python连接Oracle数据库时遇到一个报错：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cx_Oracle.DatabaseError: DPI-1047: Cannot locate a 64-bit Oracle Client library: &quot;dlopen(libclntsh.dylib, 1): no suitable image found.</span><br></pre></td></tr></table></figure>
+<p>大致是需要一个64位的Oracle客户端，而我的Mac上没有，那么解决方案也很简单，去下一个就好，为了轻便选择了Instant Oracle（instantclient-basiclite-macos.x64-19.3.0.0.0dbru.zip）<a href="https://www.oracle.com/database/technologies/instant-client/macos-intel-x86-downloads.html" target="_blank" rel="noopener">下载地址</a>。然后遵循如下操作即可完成轻量Oracle客户端的安装：</p>
+<ol>
+<li><p>创建文件夹，并将压缩包解压到这个文件夹下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir -p /opt/oracle</span><br><span class="line">sudp cp instantclient-basic-macos.x64-19.3.0.0.0dbru.zip /opt/oracle/（如果当前在下载文件所在目录下）</span><br><span class="line">cd /opt/oracle/</span><br><span class="line">sudo unzip instantclient-basic-macos.x64-19.3.0.0.0dbru.zip</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建超链接，以使应用程序能够找到该库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/lib</span><br><span class="line">ln -s /opt/oracle/instantclient_19_3/libclntsh.dylib ~/lib/</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>到此应该再执行Python的数据读取程序就可以成功了，但是他出现了：（当时没截图，从网上找的，版本号不太对但不影响）</p>
+<p><img src="/2020/09/10/如何突破macOS的文件安全权限限制/Users/zhangwenxuan/hexo1/source/_posts/如何突破macOS的文件安全权限限制/security.png" alt="security"></p>
+<p>这也没吓住我，去系统设置的安全项里给他解封了就好，但是我解封之后仍然遇到同样的错误，这就一时摸不着头脑了。</p>
+<p>Google了一番，发现<a href="http://oraontap.blogspot.com/2020/01/mac-os-x-catalina-and-oracle-instant.html" target="_blank" rel="noopener">这篇文章</a>，通过<code>ls -lg@</code>命令，我们可以得到以下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ls -lg@</span></span><br><span class="line">total 484136</span><br><span class="line">-r-xr-xr-x@ 1 staff       5780 Feb 22  2019 BASIC_LICENSE</span><br><span class="line"> com.apple.quarantine        57 </span><br><span class="line">-rw-r--r--@ 1 staff       1670 Aug 19 05:57 BASIC_README</span><br><span class="line"> com.apple.quarantine        57 </span><br><span class="line">-r-xr-xr-x@ 1 staff       5780 Feb 22  2019 SQLPLUS_LICENSE</span><br><span class="line"> com.apple.quarantine        57 </span><br><span class="line">-rw-r--r--@ 1 staff       1676 Sep  6 04:11 SQLPLUS_README</span><br><span class="line"> com.apple.quarantine        57 </span><br><span class="line">-rwxr-xr-x@ 1 staff       9888 Aug 19 05:57 adrci</span><br><span class="line"> com.apple.quarantine        57 </span><br><span class="line">-rwxr-xr-x@ 1 staff      40368 Aug 19 05:57 genezi</span><br><span class="line"> com.apple.quarantine        57 </span><br><span class="line">-r-xr-xr-x@ 1 staff        342 Apr 24  2015 glogin.sql</span><br><span class="line"> com.apple.quarantine        57 </span><br><span class="line">lrwxrwxrwx  1 staff         20 Jan 16 08:39 libclntsh.dylib -&gt; libclntsh.dylib.19.1</span><br><span class="line">lrwxrwxrwx  1 staff         20 Jan 16 08:39 libclntsh.dylib.10.1 -&gt; libclntsh.dylib.19.1</span><br><span class="line">lrwxrwxrwx  1 staff         20 Jan 16 08:39 libclntsh.dylib.11.1 -&gt; libclntsh.dylib.19.1</span><br><span class="line">lrwxrwxrwx  1 staff         20 Jan 16 08:39 libclntsh.dylib.12.1 -&gt; libclntsh.dylib.19.1</span><br><span class="line">lrwxrwxrwx  1 staff         20 Jan 16 08:39 libclntsh.dylib.18.1 -&gt; libclntsh.dylib.19.1</span><br><span class="line">-rwxr-xr-x@ 1 staff   98137256 Aug 13 02:10 libclntsh.dylib.19.1</span><br><span class="line"> com.apple.quarantine        57 </span><br><span class="line">-rwxr-xr-x@ 1 staff    4803832 Jul  7  2019 libclntshcore.dylib.19.1</span><br><span class="line"> com.apple.quarantine        57 </span><br><span class="line">-rwxr-xr-x@ 1 staff    8349944 Aug  6 12:14 libnnz19.dylib</span><br><span class="line"> com.apple.quarantine        57 </span><br><span class="line">lrwxrwxrwx  1 staff         18 Jan 16 08:39 libocci.dylib -&gt; libocci.dylib.19.1</span><br><span class="line">lrwxrwxrwx  1 staff         18 Jan 16 08:39 libocci.dylib.10.1 -&gt; libocci.dylib.19.1</span><br><span class="line">lrwxrwxrwx  1 staff         18 Jan 16 08:39 libocci.dylib.11.1 -&gt; libocci.dylib.19.1</span><br><span class="line">lrwxrwxrwx  1 staff         18 Jan 16 08:39 libocci.dylib.12.1 -&gt; libocci.dylib.19.1</span><br><span class="line">lrwxrwxrwx  1 staff         18 Jan 16 08:39 libocci.dylib.18.1 -&gt; libocci.dylib.19.1</span><br><span class="line">-rwxr-xr-x@ 1 staff    1594048 Jul  5  2019 libocci.dylib.19.1</span><br><span class="line"> com.apple.quarantine        57 </span><br><span class="line">-rwxr-xr-x@ 1 staff  125518764 Aug 19 05:57 libociei.dylib</span><br><span class="line"> com.apple.quarantine        57 </span><br><span class="line">-r-xr-xr-x@ 1 staff     151980 Jul  3  2019 libocijdbc19.dylib</span><br><span class="line"> com.apple.quarantine        57 </span><br><span class="line">-rwxr-xr-x@ 1 staff     100492 Aug 13 02:32 liboramysql19.dylib</span><br><span class="line"> com.apple.quarantine        57 </span><br><span class="line">-rwxrwxrwx@ 1 staff    1322588 Sep  6 04:05 libsqlplus.dylib</span><br><span class="line"> com.apple.quarantine        57 </span><br><span class="line">-r-xr-xr-x@ 1 staff    1659868 Jul  5  2019 libsqlplusic.dylib</span><br><span class="line"> com.apple.quarantine        57 </span><br><span class="line">drwxr-xr-x@ 3 staff         96 Aug 19 05:57 network</span><br><span class="line"> com.apple.quarantine        57 </span><br><span class="line">-rw-r--r--@ 1 staff    4210510 May 10  2019 ojdbc8.jar</span><br><span class="line"> com.apple.quarantine        57 </span><br><span class="line">-rwxr-xr-x@ 1 staff       8528 Sep  6 04:11 sqlplus</span><br><span class="line"> com.apple.quarantine        57 </span><br><span class="line">-rw-r--r--@ 1 staff    1680080 May 10  2019 ucp.jar</span><br><span class="line"> com.apple.quarantine        57 </span><br><span class="line">-rwxr-xr-x@ 1 staff     150080 Aug 19 05:57 uidrvci</span><br><span class="line"> com.apple.quarantine        57 </span><br><span class="line">-rw-r--r--@ 1 staff      74263 Apr 16  2019 xstreams.jar</span><br><span class="line"> com.apple.quarantine        57</span><br></pre></td></tr></table></figure>
+<p>这里不难看出macOS通过文件上的<code>com.apple.quarantine</code>标签来判断该文件是否应该被过滤，简单的解决方法就是把这些标签删掉，<em>注意！！：执行以下操作前请务必判断程序无问题，不然会给Mac带来感染病毒的风险</em></p>
+<ol>
+<li><p>先给所有文件写权限，因为有些文件没有该权限：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd instantclient_19_3</span><br><span class="line">$ sudo chmod u+w *</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除<code>com.apple.quarantine</code>标签：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd ..</span><br><span class="line">$ xattr -r -d -s com.apple.quarantine instantclient_19_3</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这只是一种应用场景，实际上可以应用在更多被隔离的<strong>安全软件</strong>上，使用之前请先权衡，安全第一位。</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/Search/">搜索</a></li>
+         
+          <li><a href="/">主页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/posts/">博客</a></li>
+         
+          <li><a href="https://github.com/zhangwenxuan322">项目</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2020/09/10/如何突破macOS的文件安全权限限制/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2020/09/10/如何突破macOS的文件安全权限限制/&text=如何突破macOS的文件安全权限限制"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2020/09/10/如何突破macOS的文件安全权限限制/&title=如何突破macOS的文件安全权限限制"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2020/09/10/如何突破macOS的文件安全权限限制/&is_video=false&description=如何突破macOS的文件安全权限限制"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=如何突破macOS的文件安全权限限制&body=Check out this article: http://yoursite.com/2020/09/10/如何突破macOS的文件安全权限限制/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2020/09/10/如何突破macOS的文件安全权限限制/&title=如何突破macOS的文件安全权限限制"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2020/09/10/如何突破macOS的文件安全权限限制/&title=如何突破macOS的文件安全权限限制"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2020/09/10/如何突破macOS的文件安全权限限制/&title=如何突破macOS的文件安全权限限制"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2020/09/10/如何突破macOS的文件安全权限限制/&title=如何突破macOS的文件安全权限限制"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2020/09/10/如何突破macOS的文件安全权限限制/&name=如何突破macOS的文件安全权限限制&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2020 张文轩
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/Search/">搜索</a></li>
+         
+          <li><a href="/">主页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/posts/">博客</a></li>
+         
+          <li><a href="https://github.com/zhangwenxuan322">项目</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+    <!-- Google Analytics -->
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-37473492-6', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+
+
