@@ -1,4 +1,4 @@
-<!DOCTYPE html><html><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0"><meta name="description" content="伪随机数机制 [ 张文轩 ] "><meta name="theme-color" content="#ebc65a"><title>伪随机数机制 [ 张文轩 ] </title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/index.css"><script src="https://cdn.bootcss.com/highlight.js/9.6.0/highlight.min.js" defer></script><script src="/js/paper.js" defer></script><script src="https://www.googletagmanager.com/gtag/js?id=xx-xxxxxxx-xx" async></script><script>window.dataLayer = window.dataLayer || [];
+<!DOCTYPE html><html><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0"><meta name="description" content="伪随机数机制 [ Friend ] "><meta name="theme-color" content="#ebc65a"><title>伪随机数机制 [ Friend ] </title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/index.css"><script src="https://cdn.bootcss.com/highlight.js/9.6.0/highlight.min.js" defer></script><script src="/js/paper.js" defer></script><script src="https://www.googletagmanager.com/gtag/js?id=xx-xxxxxxx-xx" async></script><script>window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'xx-xxxxxxx-xx');</script><link rel="stylesheet" href="/css/tocbot.css"><script src="/js/tocbot.js" defer></script><script>window.addEventListener('DOMContentLoaded', () => {
@@ -14,7 +14,7 @@ gtag('config', 'xx-xxxxxxx-xx');</script><link rel="stylesheet" href="/css/tocbo
     orderedList: false,
     collapseDepth: 2,
   });
-})</script><link rel="preload" href="https://cdn.bootcss.com/highlight.js/9.6.0/styles/github.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.6.0/styles/github.min.css"><link rel="preload" href="https://fonts.googleapis.com/css?family=Abril+Fatface&amp;display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface&amp;display=swap"></head><body><div class="mask-border"></div><div class="head"><div class="head__inner"><h1><a href="/">张文轩</a></h1><p></p></div></div><div class="paper-container"><div class="main"><div class="location-bar"><div class="line-1"><div class="horizontal-line" style="height: 3px"></div></div><div class="line-2"><div class="horizontal-line" style="height: 1px"></div></div><p class="text">伪随机数机制</p><div class="switch-button"><input class="container_toggle" type="checkbox" id="switch" name="mode"><label for="switch">Toggle</label></div><div class="line-3"><div class="horizontal-line" style="height: 1px"></div></div></div><div class="main__2-col"><article class="post-view__article"><div class="article__infomation"><div class="posts-item"><h2 class="posts-item__title"><a href="">伪随机数机制</a></h2><span class="post__date">2019-10-15</span></div></div><div class="article__content"><h2 id="伪随机数机制"><a href="#伪随机数机制" class="headerlink" title="伪随机数机制"></a>伪随机数机制</h2><ul>
+})</script><link rel="preload" href="https://cdn.bootcss.com/highlight.js/9.6.0/styles/github.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.6.0/styles/github.min.css"><link rel="preload" href="https://fonts.googleapis.com/css?family=Abril+Fatface&amp;display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface&amp;display=swap"></head><body><div class="mask-border"></div><div class="head"><div class="head__inner"><h1><a href="/">Friend</a></h1><p></p></div></div><div class="paper-container"><div class="main"><div class="location-bar"><div class="line-1"><div class="horizontal-line" style="height: 3px"></div></div><div class="line-2"><div class="horizontal-line" style="height: 1px"></div></div><p class="text">伪随机数机制</p><div class="switch-button"><input class="container_toggle" type="checkbox" id="switch" name="mode"><label for="switch">Toggle</label></div><div class="line-3"><div class="horizontal-line" style="height: 1px"></div></div></div><div class="main__2-col"><article class="post-view__article"><div class="article__infomation"><div class="posts-item"><h2 class="posts-item__title"><a href="">伪随机数机制</a></h2><span class="post__date">2019-10-15</span></div></div><div class="article__content"><h2 id="伪随机数机制"><a href="#伪随机数机制" class="headerlink" title="伪随机数机制"></a>伪随机数机制</h2><ul>
 <li><p>伪随机数是什么</p>
 <ol>
 <li>看似随机生成实则有周期性序列</li>
@@ -25,7 +25,9 @@ gtag('config', 'xx-xxxxxxx-xx');</script><link rel="stylesheet" href="/css/tocbo
 <p>通过真实随机事件取得的随机数</p>
 </li>
 <li><p>Java中产生随机数的两种方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Math.random()</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> Random()</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs java">Math.random()
+
+<span class="hljs-keyword">new</span> Random()</code></pre>
 </li>
 </ul>
 <ol>
@@ -34,7 +36,8 @@ gtag('config', 'xx-xxxxxxx-xx');</script><link rel="stylesheet" href="/css/tocbo
 </li>
 <li><p>java.util.Random</p>
 <p>有两种构造方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Random() <span class="comment">//使用一个和当前系统时间对应的相对时间有关的数字作为种子数</span></span><br><span class="line">Random(<span class="keyword">long</span> seed) <span class="comment">//直接传入一个种子数</span></span><br></pre></td></tr></table></figure>
+<pre><code class="hljs java">Random() <span class="hljs-comment">//使用一个和当前系统时间对应的相对时间有关的数字作为种子数</span>
+Random(<span class="hljs-keyword">long</span> seed) <span class="hljs-comment">//直接传入一个种子数</span></code></pre>
 <p><strong>什么是种子数？</strong></p>
 <p>种子就是产生随机数的第一次使用值,机制是通过一个函数,将这个种子的值转化为随机数空间中的某一个点上,并且产生的随机数均匀的散布在空间中。以后产生的随机数都与前一个随机数有关。</p>
 </li>

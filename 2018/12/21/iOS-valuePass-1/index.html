@@ -1,4 +1,4 @@
-<!DOCTYPE html><html><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0"><meta name="description" content="iOS开发页面传值的四种方式 [ 张文轩 ] "><meta name="theme-color" content="#ebc65a"><title>iOS开发页面传值的四种方式 [ 张文轩 ] </title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/index.css"><script src="https://cdn.bootcss.com/highlight.js/9.6.0/highlight.min.js" defer></script><script src="/js/paper.js" defer></script><script src="https://www.googletagmanager.com/gtag/js?id=xx-xxxxxxx-xx" async></script><script>window.dataLayer = window.dataLayer || [];
+<!DOCTYPE html><html><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0"><meta name="description" content="iOS开发页面传值的四种方式 [ Friend ] "><meta name="theme-color" content="#ebc65a"><title>iOS开发页面传值的四种方式 [ Friend ] </title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/index.css"><script src="https://cdn.bootcss.com/highlight.js/9.6.0/highlight.min.js" defer></script><script src="/js/paper.js" defer></script><script src="https://www.googletagmanager.com/gtag/js?id=xx-xxxxxxx-xx" async></script><script>window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'xx-xxxxxxx-xx');</script><link rel="stylesheet" href="/css/tocbot.css"><script src="/js/tocbot.js" defer></script><script>window.addEventListener('DOMContentLoaded', () => {
@@ -14,20 +14,173 @@ gtag('config', 'xx-xxxxxxx-xx');</script><link rel="stylesheet" href="/css/tocbo
     orderedList: false,
     collapseDepth: 2,
   });
-})</script><link rel="preload" href="https://cdn.bootcss.com/highlight.js/9.6.0/styles/github.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.6.0/styles/github.min.css"><link rel="preload" href="https://fonts.googleapis.com/css?family=Abril+Fatface&amp;display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface&amp;display=swap"></head><body><div class="mask-border"></div><div class="head"><div class="head__inner"><h1><a href="/">张文轩</a></h1><p></p></div></div><div class="paper-container"><div class="main"><div class="location-bar"><div class="line-1"><div class="horizontal-line" style="height: 3px"></div></div><div class="line-2"><div class="horizontal-line" style="height: 1px"></div></div><p class="text">iOS开发页面传值的四种方式</p><div class="switch-button"><input class="container_toggle" type="checkbox" id="switch" name="mode"><label for="switch">Toggle</label></div><div class="line-3"><div class="horizontal-line" style="height: 1px"></div></div></div><div class="main__2-col"><article class="post-view__article"><div class="article__infomation"><div class="posts-item"><h2 class="posts-item__title"><a href="">iOS开发页面传值的四种方式</a></h2><span class="post__date">2018-12-21</span></div></div><div class="article__content"><h1 id="iOS开发页面传值的四种方式"><a href="#iOS开发页面传值的四种方式" class="headerlink" title="iOS开发页面传值的四种方式"></a>iOS开发页面传值的四种方式</h1><p><em>前两天帮同学用swift解决了Block和代理传值，想到还没整理过OC的页面传值，原理都一样只是语法上的差异</em></p>
+})</script><link rel="preload" href="https://cdn.bootcss.com/highlight.js/9.6.0/styles/github.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.6.0/styles/github.min.css"><link rel="preload" href="https://fonts.googleapis.com/css?family=Abril+Fatface&amp;display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface&amp;display=swap"></head><body><div class="mask-border"></div><div class="head"><div class="head__inner"><h1><a href="/">Friend</a></h1><p></p></div></div><div class="paper-container"><div class="main"><div class="location-bar"><div class="line-1"><div class="horizontal-line" style="height: 3px"></div></div><div class="line-2"><div class="horizontal-line" style="height: 1px"></div></div><p class="text">iOS开发页面传值的四种方式</p><div class="switch-button"><input class="container_toggle" type="checkbox" id="switch" name="mode"><label for="switch">Toggle</label></div><div class="line-3"><div class="horizontal-line" style="height: 1px"></div></div></div><div class="main__2-col"><article class="post-view__article"><div class="article__infomation"><div class="posts-item"><h2 class="posts-item__title"><a href="">iOS开发页面传值的四种方式</a></h2><span class="post__date">2018-12-21</span></div></div><div class="article__content"><h1 id="iOS开发页面传值的四种方式"><a href="#iOS开发页面传值的四种方式" class="headerlink" title="iOS开发页面传值的四种方式"></a>iOS开发页面传值的四种方式</h1><p><em>前两天帮同学用swift解决了Block和代理传值，想到还没整理过OC的页面传值，原理都一样只是语法上的差异</em></p>
 <hr>
-<h3 id="一、属性传值"><a href="#一、属性传值" class="headerlink" title="一、属性传值"></a>一、属性传值</h3><p><strong>适合情况</strong>：页面A向页面B传值<br><strong>步骤</strong>：<br>1、B_VC.h中声明一个textString属性，用于接收传来的字符串<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#import &lt;UIKit/UIKit.h&gt;</span></span><br><span class="line"></span><br><span class="line">NS_ASSUME_NONNULL_BEGIN</span><br><span class="line"></span><br><span class="line">@interface B_VC : UIViewController</span><br><span class="line">@property (nonatomic , strong) NSString *textString;</span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">NS_ASSUME_NONNULL_END</span><br></pre></td></tr></table></figure></p>
-<p>m中创建label用于显示<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">- (void) propertyValuePass&#123;</span><br><span class="line">    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH*0.25, SCREEN_HEIGHT*0.15, SCREEN_WIDTH*0.5, SCREEN_HEIGHT*0.05)];</span><br><span class="line">    label.backgroundColor = [UIColor purpleColor];</span><br><span class="line">    label.textColor = [UIColor whiteColor];</span><br><span class="line">    label.textAlignment = NSTextAlignmentCenter;</span><br><span class="line">    label.font = [UIFont systemFontOfSize:20];</span><br><span class="line">    label.numberOfLines = 0;</span><br><span class="line">    label.text = self.textString;</span><br><span class="line">    [self.view addSubview:label];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>2、A_VC中创建输入框和跳转按钮<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#import "A_VC.h"</span></span><br><span class="line"><span class="comment">#import "B_VC.h"</span></span><br><span class="line"><span class="comment">#define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)</span></span><br><span class="line"><span class="comment">#define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)</span></span><br><span class="line">@interface A_VC ()</span><br><span class="line">@property(nonatomic , strong) UITextField *textField;</span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">@implementation A_VC</span><br><span class="line">- (void) viewDidLoad &#123;</span><br><span class="line">    [super viewDidLoad];</span><br><span class="line">    //输入框</span><br><span class="line">    self.textField = [[UITextField alloc] initWithFrame:CGRectMake(SCREEN_WIDTH*0.25, SCREEN_HEIGHT*0.15, SCREEN_WIDTH*0.5, SCREEN_HEIGHT*0.05)];</span><br><span class="line">    self.textField.backgroundColor = [UIColor purpleColor];</span><br><span class="line">    self.textField.placeholder = @<span class="string">"属性传值"</span>;</span><br><span class="line">    self.textField.textAlignment = NSTextAlignmentCenter;</span><br><span class="line">    self.textField.textColor = [UIColor whiteColor];</span><br><span class="line">    [self.view addSubview:self.textField];</span><br><span class="line">    // 创建一个轻拍手势，当点击屏幕任何一个地方，就取消键盘的第一响应，隐藏键盘</span><br><span class="line">    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];</span><br><span class="line">    [self.view addGestureRecognizer:tap];</span><br><span class="line">    //跳转按钮</span><br><span class="line">    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];</span><br><span class="line">    button.frame = CGRectMake(SCREEN_WIDTH*0.25, SCREEN_HEIGHT*0.23, SCREEN_WIDTH*0.5, SCREEN_HEIGHT*0.05);</span><br><span class="line">    [button setTitle:@<span class="string">"下一页"</span> forState:UIControlStateNormal];</span><br><span class="line">    button.titleLabel.font = [UIFont systemFontOfSize:20];</span><br><span class="line">    button.backgroundColor = [UIColor purpleColor];</span><br><span class="line">    [button addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];</span><br><span class="line">    [self.view addSubview:button];</span><br><span class="line">&#125;</span><br><span class="line">//放弃作为第一响应者</span><br><span class="line">- (void) handleTap:(id)sender &#123;</span><br><span class="line">    [self.textField resignFirstResponder];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//页面跳转</span><br><span class="line">-(void) clickAction:(id)sender &#123;</span><br><span class="line">    //从storyboard拿页面</span><br><span class="line">    UIStoryboard *sb = [UIStoryboard storyboardWithName:@<span class="string">"Main"</span> bundle:[NSBundle mainBundle]];</span><br><span class="line">    B_VC *B = [sb instantiateViewControllerWithIdentifier:@<span class="string">"B"</span>];</span><br><span class="line">    B.textString = self.textField.text;</span><br><span class="line">    [self.navigationController pushViewController:B animated:YES];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure></p>
+<h3 id="一、属性传值"><a href="#一、属性传值" class="headerlink" title="一、属性传值"></a>一、属性传值</h3><p><strong>适合情况</strong>：页面A向页面B传值<br><strong>步骤</strong>：<br>1、B_VC.h中声明一个textString属性，用于接收传来的字符串<br><pre><code class="hljs bash"><span class="hljs-comment">#import &lt;UIKit/UIKit.h&gt;</span>
+
+NS_ASSUME_NONNULL_BEGIN
+
+@interface B_VC : UIViewController
+@property (nonatomic , strong) NSString *textString;
+@end
+
+NS_ASSUME_NONNULL_END</code></pre></p>
+<p>m中创建label用于显示<br><pre><code class="hljs bash">- (void) propertyValuePass&#123;
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH*0.25, SCREEN_HEIGHT*0.15, SCREEN_WIDTH*0.5, SCREEN_HEIGHT*0.05)];
+    label.backgroundColor = [UIColor purpleColor];
+    label.textColor = [UIColor whiteColor];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.font = [UIFont systemFontOfSize:20];
+    label.numberOfLines = 0;
+    label.text = self.textString;
+    [self.view addSubview:label];
+&#125;</code></pre></p>
+<p>2、A_VC中创建输入框和跳转按钮<br><pre><code class="hljs bash"><span class="hljs-comment">#import "A_VC.h"</span>
+<span class="hljs-comment">#import "B_VC.h"</span>
+<span class="hljs-comment">#define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)</span>
+<span class="hljs-comment">#define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)</span>
+@interface A_VC ()
+@property(nonatomic , strong) UITextField *textField;
+@end
+
+@implementation A_VC
+- (void) viewDidLoad &#123;
+    [super viewDidLoad];
+    //输入框
+    self.textField = [[UITextField alloc] initWithFrame:CGRectMake(SCREEN_WIDTH*0.25, SCREEN_HEIGHT*0.15, SCREEN_WIDTH*0.5, SCREEN_HEIGHT*0.05)];
+    self.textField.backgroundColor = [UIColor purpleColor];
+    self.textField.placeholder = @<span class="hljs-string">"属性传值"</span>;
+    self.textField.textAlignment = NSTextAlignmentCenter;
+    self.textField.textColor = [UIColor whiteColor];
+    [self.view addSubview:self.textField];
+    // 创建一个轻拍手势，当点击屏幕任何一个地方，就取消键盘的第一响应，隐藏键盘
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+    [self.view addGestureRecognizer:tap];
+    //跳转按钮
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = CGRectMake(SCREEN_WIDTH*0.25, SCREEN_HEIGHT*0.23, SCREEN_WIDTH*0.5, SCREEN_HEIGHT*0.05);
+    [button setTitle:@<span class="hljs-string">"下一页"</span> forState:UIControlStateNormal];
+    button.titleLabel.font = [UIFont systemFontOfSize:20];
+    button.backgroundColor = [UIColor purpleColor];
+    [button addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button];
+&#125;
+//放弃作为第一响应者
+- (void) handleTap:(id)sender &#123;
+    [self.textField resignFirstResponder];
+&#125;
+
+//页面跳转
+-(void) clickAction:(id)sender &#123;
+    //从storyboard拿页面
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@<span class="hljs-string">"Main"</span> bundle:[NSBundle mainBundle]];
+    B_VC *B = [sb instantiateViewControllerWithIdentifier:@<span class="hljs-string">"B"</span>];
+    B.textString = self.textField.text;
+    [self.navigationController pushViewController:B animated:YES];
+&#125;
+
+@end</code></pre></p>
 <p>效果</p>
 <center class="half"><br><img src="/2018/12/21/iOS-valuePass-1/A1.png" height="330" width="190"><img src="/2018/12/21/iOS-valuePass-1/B1.png" height="330" width="190"><br></center>
 
 <p><strong>属性传值的核心就是在一个页面通过使用另一个页面的属性，利用这个属性来保存需要传递的信息，从而达到在另一个页面能使用前一个页面传递过来的信息。</strong></p>
 <h3 id="二、Block传值"><a href="#二、Block传值" class="headerlink" title="二、Block传值"></a>二、Block传值</h3><p><strong>适合情况</strong>：页面B向页面A传值<br><strong>步骤</strong>：<br>1、A页面创建一个用于显示B页面输入内容的label</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#import &lt;UIKit/UIKit.h&gt;</span></span><br><span class="line"></span><br><span class="line">NS_ASSUME_NONNULL_BEGIN</span><br><span class="line"></span><br><span class="line">@interface A_VC2 : UIViewController</span><br><span class="line">@property (nonatomic,retain) UILabel *label;</span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">NS_ASSUME_NONNULL_END</span><br></pre></td></tr></table></figure>
-<p>2、B页面的.h文件里创建一个用于传值的Block，一个Block方法和一个textfield<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#import &lt;UIKit/UIKit.h&gt;</span></span><br><span class="line"></span><br><span class="line">NS_ASSUME_NONNULL_BEGIN</span><br><span class="line">typedef void (^ReturnTextBlock)(NSString *showText);</span><br><span class="line">@interface B_VC2 : UIViewController</span><br><span class="line">@property (nonatomic,retain) UITextField *tf;</span><br><span class="line"></span><br><span class="line">@property (nonatomic,copy) ReturnTextBlock returnTextBlock;//定义的一个Block属性</span><br><span class="line"></span><br><span class="line">- (void)returnText:(ReturnTextBlock)block;</span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">NS_ASSUME_NONNULL_END</span><br></pre></td></tr></table></figure></p>
-<p>3、将传递过来的block赋值给自己的属性block，然后找一个时机给block传递数据，这里选取页面将要消失时传值<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#import "B_VC2.h"</span></span><br><span class="line"><span class="comment">#define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)</span></span><br><span class="line"><span class="comment">#define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)</span></span><br><span class="line">@interface B_VC2 ()</span><br><span class="line"></span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">@implementation B_VC2</span><br><span class="line"></span><br><span class="line">- (void)viewDidLoad &#123;</span><br><span class="line">    [super viewDidLoad];</span><br><span class="line">    //定义一个输入框 将文字传给第一个界面，并且显示在前一个页面的UILabel上</span><br><span class="line">    self.tf = [[UITextField alloc]initWithFrame:CGRectMake(SCREEN_WIDTH*0.25, SCREEN_HEIGHT*0.15, SCREEN_WIDTH*0.5, SCREEN_HEIGHT*0.05)];</span><br><span class="line">    self.tf.backgroundColor = [UIColor blackColor];</span><br><span class="line">    self.tf.textColor = [UIColor whiteColor];</span><br><span class="line">    self.tf.textAlignment = NSTextAlignmentCenter;</span><br><span class="line">    self.tf.placeholder = @<span class="string">"请输入内容"</span>;</span><br><span class="line">    [self.view addSubview:self.tf];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*在第一个界面传进来一个Block语句块的函数，把传进来的Block语句块保存到本类的实例变</span><br><span class="line">量returnTextBlock（.h中定义的属性）中，然后寻找一个时机调用*/</span><br><span class="line">-(void)returnText:(ReturnTextBlock)block&#123;</span><br><span class="line">    self.returnTextBlock = block;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//而这个时机就是当视图将要消失的时候，需要重写：</span><br><span class="line">-(void)viewWillDisappear:(BOOL)animated&#123;</span><br><span class="line">    <span class="keyword">if</span> (self.returnTextBlock !=nil) &#123;</span><br><span class="line">    self.returnTextBlock(self.tf.text);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure></p>
-<p>3、A页面c读取Blockd传递的数据并显示，要注意在跳转处赋值<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#import "A_VC2.h"</span></span><br><span class="line"><span class="comment">#import "B_VC2.h"</span></span><br><span class="line"><span class="comment">#define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)</span></span><br><span class="line"><span class="comment">#define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)</span></span><br><span class="line">@interface A_VC2 ()</span><br><span class="line"></span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">@implementation A_VC2</span><br><span class="line"></span><br><span class="line">- (void)viewDidLoad &#123;</span><br><span class="line">    [super viewDidLoad];</span><br><span class="line">    //跳转按钮</span><br><span class="line">    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];</span><br><span class="line">    button.frame = CGRectMake(SCREEN_WIDTH*0.25, SCREEN_HEIGHT*0.23, SCREEN_WIDTH*0.5, SCREEN_HEIGHT*0.05);</span><br><span class="line">    button.backgroundColor = [UIColor blackColor];</span><br><span class="line">    button.titleLabel.textColor = [UIColor whiteColor];</span><br><span class="line">    [button setTitle:@<span class="string">"下一页"</span> forState:UIControlStateNormal];</span><br><span class="line">    [button addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];</span><br><span class="line">    [self.view addSubview:button];</span><br><span class="line">    //label</span><br><span class="line">    self.label = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH*0.25, SCREEN_HEIGHT*0.15, SCREEN_WIDTH*0.5, SCREEN_HEIGHT*0.05)];</span><br><span class="line">    self.label.backgroundColor = [UIColor blackColor];</span><br><span class="line">    self.label.textColor = [UIColor whiteColor];</span><br><span class="line">    self.label.textAlignment = NSTextAlignmentCenter;</span><br><span class="line">    [self.view addSubview:self.label];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void) clickAction:(id)sender&#123;</span><br><span class="line">    //从storyboard拿页面</span><br><span class="line">    UIStoryboard *sb = [UIStoryboard storyboardWithName:@<span class="string">"Main"</span> bundle:[NSBundle mainBundle]];</span><br><span class="line">    B_VC2 *B = [sb instantiateViewControllerWithIdentifier:@<span class="string">"B2"</span>];</span><br><span class="line">    //跳转处赋值</span><br><span class="line">    [B returnText:^(NSString * _Nonnull showText) &#123;</span><br><span class="line">    self.label.text = showText;</span><br><span class="line">    &#125;];</span><br><span class="line">    [self.navigationController pushViewController:B animated:YES];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure></p>
+<pre><code class="hljs bash"><span class="hljs-comment">#import &lt;UIKit/UIKit.h&gt;</span>
+
+NS_ASSUME_NONNULL_BEGIN
+
+@interface A_VC2 : UIViewController
+@property (nonatomic,retain) UILabel *label;
+@end
+
+NS_ASSUME_NONNULL_END</code></pre>
+<p>2、B页面的.h文件里创建一个用于传值的Block，一个Block方法和一个textfield<br><pre><code class="hljs bash"><span class="hljs-comment">#import &lt;UIKit/UIKit.h&gt;</span>
+
+NS_ASSUME_NONNULL_BEGIN
+typedef void (^ReturnTextBlock)(NSString *showText);
+@interface B_VC2 : UIViewController
+@property (nonatomic,retain) UITextField *tf;
+
+@property (nonatomic,copy) ReturnTextBlock returnTextBlock;//定义的一个Block属性
+
+- (void)returnText:(ReturnTextBlock)block;
+@end
+
+NS_ASSUME_NONNULL_END</code></pre></p>
+<p>3、将传递过来的block赋值给自己的属性block，然后找一个时机给block传递数据，这里选取页面将要消失时传值<br><pre><code class="hljs bash"><span class="hljs-comment">#import "B_VC2.h"</span>
+<span class="hljs-comment">#define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)</span>
+<span class="hljs-comment">#define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)</span>
+@interface B_VC2 ()
+
+@end
+
+@implementation B_VC2
+
+- (void)viewDidLoad &#123;
+    [super viewDidLoad];
+    //定义一个输入框 将文字传给第一个界面，并且显示在前一个页面的UILabel上
+    self.tf = [[UITextField alloc]initWithFrame:CGRectMake(SCREEN_WIDTH*0.25, SCREEN_HEIGHT*0.15, SCREEN_WIDTH*0.5, SCREEN_HEIGHT*0.05)];
+    self.tf.backgroundColor = [UIColor blackColor];
+    self.tf.textColor = [UIColor whiteColor];
+    self.tf.textAlignment = NSTextAlignmentCenter;
+    self.tf.placeholder = @<span class="hljs-string">"请输入内容"</span>;
+    [self.view addSubview:self.tf];
+&#125;
+
+/*在第一个界面传进来一个Block语句块的函数，把传进来的Block语句块保存到本类的实例变
+量returnTextBlock（.h中定义的属性）中，然后寻找一个时机调用*/
+-(void)returnText:(ReturnTextBlock)block&#123;
+    self.returnTextBlock = block;
+&#125;
+
+//而这个时机就是当视图将要消失的时候，需要重写：
+-(void)viewWillDisappear:(BOOL)animated&#123;
+    <span class="hljs-keyword">if</span> (self.returnTextBlock !=nil) &#123;
+    self.returnTextBlock(self.tf.text);
+    &#125;
+&#125;
+
+@end</code></pre></p>
+<p>3、A页面c读取Blockd传递的数据并显示，要注意在跳转处赋值<br><pre><code class="hljs bash"><span class="hljs-comment">#import "A_VC2.h"</span>
+<span class="hljs-comment">#import "B_VC2.h"</span>
+<span class="hljs-comment">#define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)</span>
+<span class="hljs-comment">#define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)</span>
+@interface A_VC2 ()
+
+@end
+
+@implementation A_VC2
+
+- (void)viewDidLoad &#123;
+    [super viewDidLoad];
+    //跳转按钮
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = CGRectMake(SCREEN_WIDTH*0.25, SCREEN_HEIGHT*0.23, SCREEN_WIDTH*0.5, SCREEN_HEIGHT*0.05);
+    button.backgroundColor = [UIColor blackColor];
+    button.titleLabel.textColor = [UIColor whiteColor];
+    [button setTitle:@<span class="hljs-string">"下一页"</span> forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button];
+    //label
+    self.label = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH*0.25, SCREEN_HEIGHT*0.15, SCREEN_WIDTH*0.5, SCREEN_HEIGHT*0.05)];
+    self.label.backgroundColor = [UIColor blackColor];
+    self.label.textColor = [UIColor whiteColor];
+    self.label.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:self.label];
+&#125;
+
+- (void) clickAction:(id)sender&#123;
+    //从storyboard拿页面
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@<span class="hljs-string">"Main"</span> bundle:[NSBundle mainBundle]];
+    B_VC2 *B = [sb instantiateViewControllerWithIdentifier:@<span class="hljs-string">"B2"</span>];
+    //跳转处赋值
+    [B returnText:^(NSString * _Nonnull showText) &#123;
+    self.label.text = showText;
+    &#125;];
+    [self.navigationController pushViewController:B animated:YES];
+&#125;
+
+@end</code></pre></p>
 <p>效果</p>
 <center class="half"><br><img src="/2018/12/21/iOS-valuePass-1/A2.png" height="330" width="190"><img src="/2018/12/21/iOS-valuePass-1/B2.png" height="330" width="190"><br></center>
 

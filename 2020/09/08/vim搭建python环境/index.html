@@ -1,4 +1,4 @@
-<!DOCTYPE html><html><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0"><meta name="description" content="vim搭建python环境 [ 张文轩 ] "><meta name="theme-color" content="#ebc65a"><title>vim搭建python环境 [ 张文轩 ] </title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/index.css"><script src="https://cdn.bootcss.com/highlight.js/9.6.0/highlight.min.js" defer></script><script src="/js/paper.js" defer></script><script src="https://www.googletagmanager.com/gtag/js?id=xx-xxxxxxx-xx" async></script><script>window.dataLayer = window.dataLayer || [];
+<!DOCTYPE html><html><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0"><meta name="description" content="vim搭建python环境 [ Friend ] "><meta name="theme-color" content="#ebc65a"><title>vim搭建python环境 [ Friend ] </title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/index.css"><script src="https://cdn.bootcss.com/highlight.js/9.6.0/highlight.min.js" defer></script><script src="/js/paper.js" defer></script><script src="https://www.googletagmanager.com/gtag/js?id=xx-xxxxxxx-xx" async></script><script>window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'xx-xxxxxxx-xx');</script><link rel="stylesheet" href="/css/tocbot.css"><script src="/js/tocbot.js" defer></script><script>window.addEventListener('DOMContentLoaded', () => {
@@ -14,7 +14,7 @@ gtag('config', 'xx-xxxxxxx-xx');</script><link rel="stylesheet" href="/css/tocbo
     orderedList: false,
     collapseDepth: 2,
   });
-})</script><link rel="preload" href="https://cdn.bootcss.com/highlight.js/9.6.0/styles/github.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.6.0/styles/github.min.css"><link rel="preload" href="https://fonts.googleapis.com/css?family=Abril+Fatface&amp;display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface&amp;display=swap"></head><body><div class="mask-border"></div><div class="head"><div class="head__inner"><h1><a href="/">张文轩</a></h1><p></p></div></div><div class="paper-container"><div class="main"><div class="location-bar"><div class="line-1"><div class="horizontal-line" style="height: 3px"></div></div><div class="line-2"><div class="horizontal-line" style="height: 1px"></div></div><p class="text">vim搭建python环境</p><div class="switch-button"><input class="container_toggle" type="checkbox" id="switch" name="mode"><label for="switch">Toggle</label></div><div class="line-3"><div class="horizontal-line" style="height: 1px"></div></div></div><div class="main__2-col"><article class="post-view__article"><div class="article__infomation"><div class="posts-item"><h2 class="posts-item__title"><a href="">vim搭建python环境</a></h2><span class="post__date">2020-09-08</span></div></div><div class="article__content"><ul>
+})</script><link rel="preload" href="https://cdn.bootcss.com/highlight.js/9.6.0/styles/github.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.6.0/styles/github.min.css"><link rel="preload" href="https://fonts.googleapis.com/css?family=Abril+Fatface&amp;display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface&amp;display=swap"></head><body><div class="mask-border"></div><div class="head"><div class="head__inner"><h1><a href="/">Friend</a></h1><p></p></div></div><div class="paper-container"><div class="main"><div class="location-bar"><div class="line-1"><div class="horizontal-line" style="height: 3px"></div></div><div class="line-2"><div class="horizontal-line" style="height: 1px"></div></div><p class="text">vim搭建python环境</p><div class="switch-button"><input class="container_toggle" type="checkbox" id="switch" name="mode"><label for="switch">Toggle</label></div><div class="line-3"><div class="horizontal-line" style="height: 1px"></div></div></div><div class="main__2-col"><article class="post-view__article"><div class="article__infomation"><div class="posts-item"><h2 class="posts-item__title"><a href="">vim搭建python环境</a></h2><span class="post__date">2020-09-08</span></div></div><div class="article__content"><ul>
 <li><p>Vim和Python3</p>
 <p>如果用的是macOS，并且是系统自带的Vim，那么它默认是不支持Python3的，可以通过<code>vim --version | grep python</code>查看。</p>
 <p>那么首先就是要安装一个支持Python3的Vim，这里brew提供了支持，通过brew安装的Vim默认支持Python3，安装语句<code>brew install vim</code>。同时Mac自带的是Python2，所以还需要安装Python3，安装语句<code>brew install python3</code>。为了能让系统调用到我们后来通过brew安装的Vim和Python3，需要修改系统环境变量加载顺序:</p>
@@ -30,14 +30,28 @@ gtag('config', 'xx-xxxxxxx-xx');</script><link rel="stylesheet" href="/css/tocbo
 </li>
 <li><p>Vim中直接运行Python文件</p>
 <p>在.vimrc中配置如下内容：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">" Python相关</span></span><br><span class="line"><span class="string">filetype plugin on</span></span><br><span class="line"><span class="string">"</span> 按 F5 执行当前 Python 代码<span class="string">"</span></span><br><span class="line"><span class="string">map &lt;F5&gt; :call PRUN()&lt;CR&gt;</span></span><br><span class="line"><span class="string">func! PRUN()</span></span><br><span class="line"><span class="string">    exec "</span>w<span class="string">"</span></span><br><span class="line"><span class="string">    if &amp;filetype == 'python'</span></span><br><span class="line"><span class="string">        exec "</span>!python3 %<span class="string">"</span></span><br><span class="line"><span class="string">    endif</span></span><br><span class="line"><span class="string">endfunc</span></span><br></pre></td></tr></table></figure>
+<pre><code class="hljs sh"><span class="hljs-string">" Python相关
+filetype plugin on
+"</span> 按 F5 执行当前 Python 代码<span class="hljs-string">"
+map &lt;F5&gt; :call PRUN()&lt;CR&gt;
+func! PRUN()
+    exec "</span>w<span class="hljs-string">"
+    if &amp;filetype == 'python'
+        exec "</span>!python3 %<span class="hljs-string">"
+    endif
+endfunc</span></code></pre>
 </li>
 <li><p>Vim插件</p>
 <p>推荐使用vim-plug进行Vim的插件管理，安装步骤如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/.vim/autoload/</span><br><span class="line">cd ~/.vim/autoload/</span><br><span class="line">wget https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs shell">mkdir ~/.vim/autoload/
+cd ~/.vim/autoload/
+wget https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim</code></pre>
 <p><a href="https://raw.githubusercontent.com的域名被DNS污染了，被解析成无效IP，需要挂代理。" target="_blank" rel="noopener">https://raw.githubusercontent.com的域名被DNS污染了，被解析成无效IP，需要挂代理。</a></p>
 <p>安装完成后只需要在.vimrc中将插件写在如下代码块中：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">call plug<span class="comment">#begin('~/.vim/plugged')</span></span><br><span class="line"><span class="string">"插件写在这里"</span></span><br><span class="line"><span class="string">"Plug 'xxx/xxx' 格式像这样"</span> </span><br><span class="line">call plug<span class="comment">#end()</span></span><br></pre></td></tr></table></figure>
+<pre><code class="hljs sh">call plug<span class="hljs-comment">#begin('~/.vim/plugged')</span>
+<span class="hljs-string">"插件写在这里"</span>
+<span class="hljs-string">"Plug 'xxx/xxx' 格式像这样"</span> 
+call plug<span class="hljs-comment">#end()</span></code></pre>
 <p>保存后执行<code>:PlugInstall</code>即可自动安装插件</p>
 </li>
 <li><p>关于jedi-vim插件无法联想第三方库文件的问题</p>
