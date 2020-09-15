@@ -263,7 +263,7 @@
 
   <url>
     <loc>http://yoursite.com/</loc>
-    <lastmod>2020-09-14</lastmod>
+    <lastmod>2020-09-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -271,7 +271,7 @@
   
   <url>
     <loc>http://yoursite.com/tags/Mac/</loc>
-    <lastmod>2020-09-14</lastmod>
+    <lastmod>2020-09-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
