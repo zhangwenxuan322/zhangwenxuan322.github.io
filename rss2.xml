@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"
+  xmlns:atom="http://www.w3.org/2005/Atom"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Friend</title>
+    <link>http://yoursite.com/</link>
+    
+    <image>
+      <url>http://yoursite.com/icon.png</url>
+      <title>Friend</title>
+      <link>http://yoursite.com/</link>
+    </image>
+    
+    <atom:link href="http://yoursite.com/rss2.xml" rel="self" type="application/rss+xml"/>
+    
+    <description></description>
+    <pubDate>Tue, 15 Sep 2020 05:51:24 GMT</pubDate>
+    <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>如何突破macOS的文件安全权限限制</title>
+      <link>http://yoursite.com/2020/09/10/%E5%A6%82%E4%BD%95%E7%AA%81%E7%A0%B4macOS%E7%9A%84%E6%96%87%E4%BB%B6%E5%AE%89%E5%85%A8%E6%9D%83%E9%99%90%E9%99%90%E5%88%B6/</link>
+      <guid>http://yoursite.com/2020/09/10/%E5%A6%82%E4%BD%95%E7%AA%81%E7%A0%B4macOS%E7%9A%84%E6%96%87%E4%BB%B6%E5%AE%89%E5%85%A8%E6%9D%83%E9%99%90%E9%99%90%E5%88%B6/</guid>
+      <pubDate>Thu, 10 Sep 2020 06:59:55 GMT</pubDate>
+      
+      <description>使用xattr命令删除com.apple.quarantine标签</description>
+      
+      
+      
+      
+      
+      <category domain="http://yoursite.com/tags/Mac/">Mac</category>
+      
+      
+      <comments>http://yoursite.com/2020/09/10/%E5%A6%82%E4%BD%95%E7%AA%81%E7%A0%B4macOS%E7%9A%84%E6%96%87%E4%BB%B6%E5%AE%89%E5%85%A8%E6%9D%83%E9%99%90%E9%99%90%E5%88%B6/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>vim搭建python环境</title>
+      <link>http://yoursite.com/2020/09/08/vim%E6%90%AD%E5%BB%BApython%E7%8E%AF%E5%A2%83/</link>
+      <guid>http://yoursite.com/2020/09/08/vim%E6%90%AD%E5%BB%BApython%E7%8E%AF%E5%A2%83/</guid>
+      <pubDate>Tue, 08 Sep 2020 12:48:40 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Vim和Python3&lt;/p&gt;
+&lt;p&gt;如果用的是macOS，并且是系统自带的Vim，那么它默认是不支持Python3的，可以通过&lt;code&gt;vim --version | grep</description>
+          
+        
+      
+      
+      
+      
+      
+      
+      <comments>http://yoursite.com/2020/09/08/vim%E6%90%AD%E5%BB%BApython%E7%8E%AF%E5%A2%83/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>git commit提交关键字整理</title>
+      <link>http://yoursite.com/2020/08/17/git-commit%E6%8F%90%E4%BA%A4%E5%85%B3%E9%94%AE%E5%AD%97%E6%95%B4%E7%90%86/</link>
+      <guid>http://yoursite.com/2020/08/17/git-commit%E6%8F%90%E4%BA%A4%E5%85%B3%E9%94%AE%E5%AD%97%E6%95%B4%E7%90%86/</guid>
+      <pubDate>Mon, 17 Aug 2020 07:06:46 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;p&gt;看到了阿里技术微信公众号的关于&lt;code&gt;git commit&lt;/code&gt;规范的建议文章，在此做一下个人习惯上的整理&lt;/p&gt;
+&lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot;</description>
+          
+        
+      
+      
+      
+      
+      
+      
+      <comments>http://yoursite.com/2020/08/17/git-commit%E6%8F%90%E4%BA%A4%E5%85%B3%E9%94%AE%E5%AD%97%E6%95%B4%E7%90%86/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>个人配置记录</title>
+      <link>http://yoursite.com/2020/05/29/%E4%B8%AA%E4%BA%BA%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/</link>
+      <guid>http://yoursite.com/2020/05/29/%E4%B8%AA%E4%BA%BA%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/</guid>
+      <pubDate>Fri, 29 May 2020 07:58:20 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;zshrc&quot;&gt;&lt;a href=&quot;#zshrc&quot; class=&quot;headerlink&quot; title=&quot;.zshrc&quot;&gt;&lt;/a&gt;.zshrc&lt;/h1&gt;&lt;pre&gt;&lt;code class=&quot;hljs shell&quot;&gt;&lt;span</description>
+          
+        
+      
+      
+      
+      
+      
+      
+      <comments>http://yoursite.com/2020/05/29/%E4%B8%AA%E4%BA%BA%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>大数据历史发展以及未来架构路线</title>
+      <link>http://yoursite.com/2020/05/29/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%8E%86%E5%8F%B2%E5%8F%91%E5%B1%95%E4%BB%A5%E5%8F%8A%E6%9C%AA%E6%9D%A5%E6%9E%B6%E6%9E%84%E8%B7%AF%E7%BA%BF/</link>
+      <guid>http://yoursite.com/2020/05/29/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%8E%86%E5%8F%B2%E5%8F%91%E5%B1%95%E4%BB%A5%E5%8F%8A%E6%9C%AA%E6%9D%A5%E6%9E%B6%E6%9E%84%E8%B7%AF%E7%BA%BF/</guid>
+      <pubDate>Fri, 29 May 2020 01:31:20 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;大数据历史&quot;&gt;&lt;a href=&quot;#大数据历史&quot; class=&quot;headerlink&quot;</description>
+          
+        
+      
+      
+      
+      
+      
+      
+      <comments>http://yoursite.com/2020/05/29/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%8E%86%E5%8F%B2%E5%8F%91%E5%B1%95%E4%BB%A5%E5%8F%8A%E6%9C%AA%E6%9D%A5%E6%9E%B6%E6%9E%84%E8%B7%AF%E7%BA%BF/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>项目打包到阿里云运行并停止的流程</title>
+      <link>http://yoursite.com/2020/05/20/%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91%E8%BF%90%E8%A1%8C%E5%B9%B6%E5%81%9C%E6%AD%A2%E7%9A%84%E6%B5%81%E7%A8%8B/</link>
+      <guid>http://yoursite.com/2020/05/20/%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91%E8%BF%90%E8%A1%8C%E5%B9%B6%E5%81%9C%E6%AD%A2%E7%9A%84%E6%B5%81%E7%A8%8B/</guid>
+      <pubDate>Wed, 20 May 2020 01:45:11 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;center class=&quot;half&quot;&gt;&lt;br&gt;&lt;img src=&quot;/2020/05/20/项目打包到阿里云运行并停止的流程/项目打包到阿里云运行并停止的流程.png&quot; srcset=&quot;/img/loading.gif&quot;&gt;&lt;br&gt;&lt;/center&gt;
+
+&lt;h2</description>
+          
+        
+      
+      
+      
+      
+      
+      
+      <comments>http://yoursite.com/2020/05/20/%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91%E8%BF%90%E8%A1%8C%E5%B9%B6%E5%81%9C%E6%AD%A2%E7%9A%84%E6%B5%81%E7%A8%8B/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Spark中的TSUDAF</title>
+      <link>http://yoursite.com/2020/04/02/Spark%E4%B8%AD%E7%9A%84TSUDAF/</link>
+      <guid>http://yoursite.com/2020/04/02/Spark%E4%B8%AD%E7%9A%84TSUDAF/</guid>
+      <pubDate>Thu, 02 Apr 2020 02:41:53 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;类型安全的用户自定义聚合函数（Type-Safe-User-Defined-Aggregate-Functions）&quot;&gt;&lt;a href=&quot;#类型安全的用户自定义聚合函数（Type-Safe-User-Defined-Aggregate-Functions）&quot;</description>
+          
+        
+      
+      
+      
+      
+      
+      
+      <comments>http://yoursite.com/2020/04/02/Spark%E4%B8%AD%E7%9A%84TSUDAF/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Spark中的UDAF</title>
+      <link>http://yoursite.com/2020/04/02/Spark%E4%B8%AD%E7%9A%84UDAF/</link>
+      <guid>http://yoursite.com/2020/04/02/Spark%E4%B8%AD%E7%9A%84UDAF/</guid>
+      <pubDate>Thu, 02 Apr 2020 02:00:29 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;无类型的用户自定于聚合函数（Untyped-User-Defined-Aggregate-Functions）&quot;&gt;&lt;a href=&quot;#无类型的用户自定于聚合函数（Untyped-User-Defined-Aggregate-Functions）&quot;</description>
+          
+        
+      
+      
+      
+      
+      
+      
+      <comments>http://yoursite.com/2020/04/02/Spark%E4%B8%AD%E7%9A%84UDAF/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>SparkSQL</title>
+      <link>http://yoursite.com/2020/04/01/SparkSQL/</link>
+      <guid>http://yoursite.com/2020/04/01/SparkSQL/</guid>
+      <pubDate>Wed, 01 Apr 2020 02:15:12 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;Spark-SQL&quot;&gt;&lt;a href=&quot;#Spark-SQL&quot; class=&quot;headerlink&quot; title=&quot;Spark SQL&quot;&gt;&lt;/a&gt;Spark SQL&lt;/h1&gt;&lt;h2 id=&quot;架构&quot;&gt;&lt;a href=&quot;#架构&quot; class=&quot;headerlink&quot;</description>
+          
+        
+      
+      
+      
+      
+      
+      
+      <comments>http://yoursite.com/2020/04/01/SparkSQL/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Spark中的RDD</title>
+      <link>http://yoursite.com/2020/03/31/Spark%E4%B8%AD%E7%9A%84RDD/</link>
+      <guid>http://yoursite.com/2020/03/31/Spark%E4%B8%AD%E7%9A%84RDD/</guid>
+      <pubDate>Tue, 31 Mar 2020 09:31:55 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;Spark-RDD&quot;&gt;&lt;a href=&quot;#Spark-RDD&quot; class=&quot;headerlink&quot; title=&quot;Spark RDD&quot;&gt;&lt;/a&gt;Spark RDD&lt;/h1&gt;&lt;p&gt;Spark 的核心是建立在统一的抽象弹性分布式数据集（Resiliennt</description>
+          
+        
+      
+      
+      
+      
+      
+      
+      <comments>http://yoursite.com/2020/03/31/Spark%E4%B8%AD%E7%9A%84RDD/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Hadoop学习笔记</title>
+      <link>http://yoursite.com/2020/03/31/Hadoop%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
+      <guid>http://yoursite.com/2020/03/31/Hadoop%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
+      <pubDate>Tue, 31 Mar 2020 01:24:27 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;Hadoop简介&quot;&gt;&lt;a href=&quot;#Hadoop简介&quot; class=&quot;headerlink&quot;</description>
+          
+        
+      
+      
+      
+      
+      
+      
+      <comments>http://yoursite.com/2020/03/31/Hadoop%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Https和Http的区别</title>
+      <link>http://yoursite.com/2020/02/27/Https%E5%92%8CHttp%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
+      <guid>http://yoursite.com/2020/02/27/Https%E5%92%8CHttp%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
+      <pubDate>Thu, 27 Feb 2020 02:01:51 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;昨天在做毕设开发安卓端，向个人服务器请求数据的时候，遇到了&lt;code&gt;CLEARTEXT communication to *** not</description>
+          
+        
+      
+      
+      
+      
+      
+      
+      <comments>http://yoursite.com/2020/02/27/Https%E5%92%8CHttp%E7%9A%84%E5%8C%BA%E5%88%AB/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>算法-二分查找法</title>
+      <link>http://yoursite.com/2020/02/22/%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E6%B3%95/</link>
+      <guid>http://yoursite.com/2020/02/22/%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E6%B3%95/</guid>
+      <pubDate>Sat, 22 Feb 2020 02:49:38 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;定义&quot;&gt;&lt;a href=&quot;#定义&quot; class=&quot;headerlink&quot; title=&quot;定义&quot;&gt;&lt;/a&gt;定义&lt;/h1&gt;&lt;p&gt;二分查找也称为折半查找，每次都能将查找区间减半，这种折半特性的算法时间复杂度为 O(logN)。&lt;/p&gt;
+&lt;h1 id=&quot;关键&quot;&gt;&lt;a</description>
+          
+        
+      
+      
+      
+      
+      
+      
+      <comments>http://yoursite.com/2020/02/22/%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E6%B3%95/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>RESTful的一些状态码记录</title>
+      <link>http://yoursite.com/2020/02/19/RESTful%E7%9A%84%E4%B8%80%E4%BA%9B%E7%8A%B6%E6%80%81%E7%A0%81%E8%AE%B0%E5%BD%95/</link>
+      <guid>http://yoursite.com/2020/02/19/RESTful%E7%9A%84%E4%B8%80%E4%BA%9B%E7%8A%B6%E6%80%81%E7%A0%81%E8%AE%B0%E5%BD%95/</guid>
+      <pubDate>Wed, 19 Feb 2020 09:18:56 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;定义&quot;&gt;&lt;a href=&quot;#定义&quot; class=&quot;headerlink&quot; title=&quot;定义&quot;&gt;&lt;/a&gt;定义&lt;/h1&gt;&lt;p&gt;RESTFUL（&lt;strong&gt;Representational State</description>
+          
+        
+      
+      
+      
+      
+      
+      
+      <comments>http://yoursite.com/2020/02/19/RESTful%E7%9A%84%E4%B8%80%E4%BA%9B%E7%8A%B6%E6%80%81%E7%A0%81%E8%AE%B0%E5%BD%95/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>CocoaTouch中的UIApplication</title>
+      <link>http://yoursite.com/2019/10/23/CocoaTouch%E4%B8%AD%E7%9A%84UIApplication/</link>
+      <guid>http://yoursite.com/2019/10/23/CocoaTouch%E4%B8%AD%E7%9A%84UIApplication/</guid>
+      <pubDate>Wed, 23 Oct 2019 01:25:18 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h2 id=&quot;UIApplication干什么的？&quot;&gt;&lt;a href=&quot;#UIApplication干什么的？&quot; class=&quot;headerlink&quot;</description>
+          
+        
+      
+      
+      
+      
+      
+      
+      <comments>http://yoursite.com/2019/10/23/CocoaTouch%E4%B8%AD%E7%9A%84UIApplication/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Objective-C中的Runtime</title>
+      <link>http://yoursite.com/2019/10/22/Objective-C%E4%B8%AD%E7%9A%84Runtime/</link>
+      <guid>http://yoursite.com/2019/10/22/Objective-C%E4%B8%AD%E7%9A%84Runtime/</guid>
+      <pubDate>Tue, 22 Oct 2019 06:04:53 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h2 id=&quot;OC和C的区别&quot;&gt;&lt;a href=&quot;#OC和C的区别&quot; class=&quot;headerlink&quot;</description>
+          
+        
+      
+      
+      
+      
+      
+      
+      <comments>http://yoursite.com/2019/10/22/Objective-C%E4%B8%AD%E7%9A%84Runtime/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>CocoaTouch中的事件处理</title>
+      <link>http://yoursite.com/2019/10/21/CocoaTouch%E4%B8%AD%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86/</link>
+      <guid>http://yoursite.com/2019/10/21/CocoaTouch%E4%B8%AD%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86/</guid>
+      <pubDate>Mon, 21 Oct 2019 10:19:10 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h2 id=&quot;事件分类&quot;&gt;&lt;a href=&quot;#事件分类&quot; class=&quot;headerlink&quot; title=&quot;事件分类&quot;&gt;&lt;/a&gt;事件分类&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;触屏事件(Touch Event)&lt;/li&gt;
+&lt;li&gt;运动事件(Motion</description>
+          
+        
+      
+      
+      
+      
+      
+      
+      <comments>http://yoursite.com/2019/10/21/CocoaTouch%E4%B8%AD%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Objective-C中的内存管理</title>
+      <link>http://yoursite.com/2019/10/20/Objective-C%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</link>
+      <guid>http://yoursite.com/2019/10/20/Objective-C%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</guid>
+      <pubDate>Sun, 20 Oct 2019 05:37:26 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h2 id=&quot;OC的内存分配机制&quot;&gt;&lt;a href=&quot;#OC的内存分配机制&quot; class=&quot;headerlink&quot;</description>
+          
+        
+      
+      
+      
+      
+      
+      
+      <comments>http://yoursite.com/2019/10/20/Objective-C%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Objective-C中的Block</title>
+      <link>http://yoursite.com/2019/10/19/Objective-C%E4%B8%AD%E7%9A%84Block/</link>
+      <guid>http://yoursite.com/2019/10/19/Objective-C%E4%B8%AD%E7%9A%84Block/</guid>
+      <pubDate>Sat, 19 Oct 2019 15:07:59 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h2 id=&quot;Block的定义&quot;&gt;&lt;a href=&quot;#Block的定义&quot; class=&quot;headerlink&quot; title=&quot;Block的定义&quot;&gt;&lt;/a&gt;Block的定义&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;一种匿名函数，语法如下：&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;return_type</description>
+          
+        
+      
+      
+      
+      
+      
+      
+      <comments>http://yoursite.com/2019/10/19/Objective-C%E4%B8%AD%E7%9A%84Block/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Objective-C中的Runloop</title>
+      <link>http://yoursite.com/2019/10/19/Objective-C%E4%B8%AD%E7%9A%84Runloop/</link>
+      <guid>http://yoursite.com/2019/10/19/Objective-C%E4%B8%AD%E7%9A%84Runloop/</guid>
+      <pubDate>Sat, 19 Oct 2019 06:45:25 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h2 id=&quot;什么是Runloop&quot;&gt;&lt;a href=&quot;#什么是Runloop&quot; class=&quot;headerlink&quot;</description>
+          
+        
+      
+      
+      
+      
+      
+      
+      <comments>http://yoursite.com/2019/10/19/Objective-C%E4%B8%AD%E7%9A%84Runloop/#disqus_thread</comments>
+      
+    </item>
+    
+  </channel>
+</rss>
