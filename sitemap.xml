@@ -4,7 +4,7 @@
   <url>
     <loc>http://yoursite.com/2020/09/22/Man-in-the-middle/</loc>
     
-    <lastmod>2020-09-22</lastmod>
+    <lastmod>2020-09-23</lastmod>
     
   </url>
   
@@ -270,7 +270,7 @@
 
   <url>
     <loc>http://yoursite.com/</loc>
-    <lastmod>2020-09-22</lastmod>
+    <lastmod>2020-09-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -278,14 +278,14 @@
   
   <url>
     <loc>http://yoursite.com/tags/Internet/</loc>
-    <lastmod>2020-09-22</lastmod>
+    <lastmod>2020-09-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/Mac/</loc>
-    <lastmod>2020-09-22</lastmod>
+    <lastmod>2020-09-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
