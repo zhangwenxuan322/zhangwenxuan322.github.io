@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      852 字
+      1.1k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      9
+      12
        分钟
     </span>
   
@@ -266,6 +266,16 @@
 <p>简而言之，就是用 HTTPS 协议的网站你没办法简单地抓包看到请求内容了。</p>
 </li>
 </ol>
+<h2 id="拦截-HTTPS-请求内容"><a href="#拦截-HTTPS-请求内容" class="headerlink" title="拦截 HTTPS 请求内容"></a>拦截 HTTPS 请求内容</h2><p>由于 HTTPS 协议是用非对称加密算法，所以暴力解密几乎不可能。但即使这样安全的加解密流程下也存在漏洞，中间人劫持的流程如下：</p>
+<ul>
+<li>你和服务器之间有一台邪恶的路由器M</li>
+<li>当你给HTTPS网站的服务器发请求后，网站带着公钥P响应你</li>
+<li>响应到达M，M拿到了P，但是并不把它交给你，而是自己伪造了一对公私钥MP和MS，并把MP给你</li>
+<li>你拿到MP，以为是网站的公钥P，用它加密了S，再请求网站</li>
+<li>请求到达M，M使用MS解开S，再用P加密S交给网站</li>
+</ul>
+<p><img src="https://hackernoon.com/drafts/sh1g3wdt.png" srcset="/img/loading.gif" alt="MITM" title="MITM"></p>
+<p>如果想在 Mac 上实践一下可以借助自带的 Keychain Access 软件生成一个被自己系统信任的 CA 证书，然后借助 Surge 等软件可以做到本机的 HTTPS 抓包。</p>
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ol>
 <li><a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB" target="_blank" rel="noopener">维基百科MITM</a></li>
 <li><a href="http://scm.zoomquiet.top/data/20161106124704/index.html" target="_blank" rel="noopener">Surge MitM 证书的创建和配置</a></li>
