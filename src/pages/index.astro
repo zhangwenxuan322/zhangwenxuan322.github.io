@@ -3,15 +3,176 @@
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Personal homepage of Wenxuan Zhang." />
+    <meta name="generator" content={Astro.generator} />
+    <title>Wenxuan Zhang</title>
+  </head>
+  <body>
+    <main>
+      <header>
+        <p class="eyebrow">Wenxuan Zhang</p>
+        <h1>Software engineer building small, useful things.</h1>
+        <p class="intro">
+          I use this site as a quiet home on the internet: projects, notes, and links
+          that are useful enough to keep around.
+        </p>
+      </header>
+
+      <section aria-labelledby="projects">
+        <h2 id="projects">Projects</h2>
+        <ul>
+          <li>
+            <a href="https://github.com/zhangwenxuan322">GitHub</a>
+            <span>Code, experiments, and unfinished ideas.</span>
+          </li>
+          <li>
+            <a href="/">This site</a>
+            <span>A minimal Astro homepage hosted on GitHub Pages.</span>
+          </li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="notes">
+        <h2 id="notes">Notes</h2>
+        <p>
+          No blog treadmill. Just short references and practical notes when something
+          is worth remembering.
+        </p>
+      </section>
+
+      <section aria-labelledby="contact">
+        <h2 id="contact">Elsewhere</h2>
+        <p>
+          <a href="https://github.com/zhangwenxuan322">GitHub</a>
+        </p>
+      </section>
+    </main>
+  </body>
 </html>
+
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #fbfaf7;
+    --text: #151515;
+    --muted: #62615d;
+    --line: #dedbd2;
+    --accent: #0b5fff;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
+    background: var(--bg);
+    color: var(--text);
+  }
+
+  body {
+    margin: 0;
+  }
+
+  main {
+    width: min(720px, calc(100vw - 40px));
+    margin: 0 auto;
+    padding: 72px 0 56px;
+  }
+
+  header,
+  section {
+    border-bottom: 1px solid var(--line);
+    padding: 0 0 28px;
+    margin: 0 0 28px;
+  }
+
+  section:last-child {
+    border-bottom: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .eyebrow,
+  h2 {
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    margin: 0 0 14px;
+  }
+
+  h1 {
+    font-size: clamp(32px, 8vw, 64px);
+    font-weight: 500;
+    letter-spacing: -0.06em;
+    line-height: 0.95;
+    margin: 0 0 24px;
+    max-width: 11ch;
+  }
+
+  .intro {
+    font-size: 18px;
+    max-width: 58ch;
+  }
+
+  p,
+  li {
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 1.65;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 16px;
+    padding: 10px 0;
+  }
+
+  a {
+    color: var(--text);
+    text-decoration-color: var(--line);
+    text-underline-offset: 4px;
+  }
+
+  a:hover,
+  a:focus-visible {
+    color: var(--accent);
+    text-decoration-color: currentColor;
+  }
+
+  a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  @media (max-width: 560px) {
+    main {
+      width: min(100% - 28px, 720px);
+      padding-top: 44px;
+    }
+
+    li {
+      grid-template-columns: 1fr;
+      gap: 2px;
+    }
+  }
+</style>
