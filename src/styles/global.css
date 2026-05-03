@@ -42,13 +42,31 @@ section:last-child {
   padding-bottom: 0;
 }
 
-.eyebrow,
 h2 {
   color: var(--muted);
   font-size: 14px;
   font-weight: 500;
   letter-spacing: 0.02em;
   margin: 0 0 14px;
+}
+
+.name {
+  color: var(--text);
+  font-size: clamp(22px, 4vw, 34px);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin: 0 0 12px;
+}
+
+.contact-links {
+  display: flex;
+  gap: 16px;
+  margin: 0 0 22px;
+}
+
+.contact-links a {
+  font-size: 14px;
 }
 
 h1 {
@@ -62,14 +80,20 @@ h1 {
 
 .intro {
   font-size: 18px;
-  max-width: 58ch;
+  max-width: 100%;
 }
 
 p,
-li {
+li,
+strong {
   color: var(--muted);
   font-size: 16px;
   line-height: 1.65;
+}
+
+strong {
+  color: var(--text);
+  font-weight: 500;
 }
 
 p {
@@ -116,4 +140,5 @@ a:focus-visible {
     grid-template-columns: 1fr;
     gap: 2px;
   }
+
 }

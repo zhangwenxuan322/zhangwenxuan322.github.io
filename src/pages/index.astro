@@ -9,48 +9,59 @@ import '../styles/global.css';
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Personal homepage of Wenxuan Zhang." />
+    <meta
+      name="description"
+      content="Personal homepage of Oscar Zhang, a full stack software engineer in Canberra."
+    />
     <meta name="generator" content={Astro.generator} />
-    <title>Wenxuan Zhang</title>
+    <title>Wenxuan (Oscar) Zhang</title>
   </head>
   <body>
     <main>
       <header>
-        <p class="eyebrow">Wenxuan Zhang</p>
-        <h1>Software engineer building small, useful things.</h1>
+        <p class="name">Wenxuan (Oscar) Zhang</p>
+        <nav class="contact-links" aria-label="Contact links">
+          <a href="mailto:oscarzhangwx@gmail.com">Email</a>
+          <a href="https://github.com/zhangwenxuan322">GitHub</a>
+          <a href="https://linkedin.com/in/wenxuan322">LinkedIn</a>
+        </nav>
         <p class="intro">
-          I use this site as a quiet home on the internet: projects, notes, and links
-          that are useful enough to keep around.
+          Full stack software engineer in Canberra. I work around web applications,
+          cloud systems, data pipelines, and practical automation, with a preference
+          for simple tools that make messy operational work easier.
         </p>
       </header>
 
-      <section aria-labelledby="projects">
-        <h2 id="projects">Projects</h2>
+      <section aria-labelledby="work">
+        <h2 id="work">Work</h2>
         <ul>
           <li>
-            <a href="https://github.com/zhangwenxuan322">GitHub</a>
-            <span>Code, experiments, and unfinished ideas.</span>
+            <strong>Now</strong>
+            <span>Analyst Programmer at <a href="https://evolvefm.com.au/">Evolve FM</a>, building internal tools, automations, data workflows, and reporting systems for facilities operations.</span>
           </li>
           <li>
-            <a href="/">This site</a>
-            <span>A minimal Astro homepage hosted on GitHub Pages.</span>
+            <strong>Before</strong>
+            <span>Worked on AWS data engineering at <a href="https://shinesolutions.com/">Shine Solutions</a> and large-scale grid data systems with Spark, Flink, Kafka, and graph databases in China.</span>
+          </li>
+          <li>
+            <strong>Also</strong>
+            <span>Started with iOS and mobile app development, which still shapes how I think about user-facing software.</span>
           </li>
         </ul>
       </section>
 
-      <section aria-labelledby="notes">
-        <h2 id="notes">Notes</h2>
-        <p>
-          No blog treadmill. Just short references and practical notes when something
-          is worth remembering.
-        </p>
-      </section>
-
-      <section aria-labelledby="contact">
-        <h2 id="contact">Elsewhere</h2>
-        <p>
-          <a href="https://github.com/zhangwenxuan322">GitHub</a>
-        </p>
+      <section aria-labelledby="projects">
+        <h2 id="projects">Selected</h2>
+        <ul>
+          <li>
+            <strong>AI tools</strong>
+            <span>Built healthcare and therapy prototypes using Django, Python, speech-to-text, LLMs, and AWS.</span>
+          </li>
+          <li>
+            <strong>Data systems</strong>
+            <span>Worked on pipelines and dashboards for infrastructure, energy, and operations data.</span>
+          </li>
+        </ul>
       </section>
     </main>
   </body>
